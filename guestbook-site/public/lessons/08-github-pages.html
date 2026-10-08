@@ -53,32 +53,23 @@
 
     <section aria-labelledby="glimpse">
       <h2 id="glimpse">Glimpse</h2>
-      <p>
-        After this lesson your lessons are online at a real public URL, like:
-      </p>
-      <pre><code>https://YOUR-NAME.github.io/guestbook-site/public/index.php</code></pre>
-      <p>
-        (GitHub Pages serves files as-is; <code>index.php</code> links still
-        open the page but PHP code inside is NOT executed — see the warning
-        below.)
-      </p>
+      <p>This repository publishes its static lessons at:</p>
+      <pre><code>https://iantolentino.github.io/FSG/</code></pre>
+      <p>The Pages workflow builds a small static site from the course files. It does not publish the PHP pages or the guestbook database.</p>
     </section>
 
     <section aria-labelledby="code-to-add">
       <h2 id="code-to-add">Steps</h2>
       <ol>
-        <li>Open your repository on github.com.</li>
-        <li>Click <strong>Settings</strong> (top bar).</li>
-        <li>In the left menu click <strong>Pages</strong> (under "Code and
-          automation").</li>
+        <li>Open <a href="https://github.com/iantolentino/FSG">this repository</a>
+          on github.com.</li>
+        <li>Open <strong>Settings</strong>, then <strong>Pages</strong>.</li>
         <li>Under "Build and deployment", set <strong>Source</strong> to
-          <strong>Deploy from a branch</strong>.</li>
-        <li>Choose branch <strong>main</strong> and folder
-          <strong>/ (root)</strong>, then click <strong>Save</strong>.</li>
-        <li>Wait 1–3 minutes. The Settings &rarr; Pages screen then shows a
-          green box with your URL.</li>
-        <li>Open the URL and add <code>/public/index.php</code> to see the
-          lessons.</li>
+          <strong>GitHub Actions</strong>.</li>
+        <li>Push a change to the <code>main</code> branch, or open the
+          <strong>Actions</strong> tab and run "Deploy course to GitHub Pages".</li>
+        <li>Wait for the workflow to finish. The Pages screen and the
+          deployment job show the live URL.</li>
       </ol>
     </section>
 
@@ -108,12 +99,11 @@
       <ol>
         <li>Settings &rarr; Pages shows a green "Your site is live at…"
           message.</li>
-        <li>The URL opens and you can click through lessons 1, 2, 3, 7, 8.</li>
+        <li>The URL opens and you can click through lessons 1–3 and 7–13.</li>
         <li>Copy buttons and the lesson checkboxes still work on the live
           site (JS and localStorage work fine on Pages).</li>
-        <li>Open <code>/public/app/index.php</code> on the live site: the
-          browser DOWNLOADS the raw PHP file or shows nothing useful. That is
-          the "no PHP here" rule made visible.</li>
+        <li>Open the site home page to see how to run lessons 4–6 and the
+          guestbook app locally with PHP.</li>
       </ol>
     </section>
 
@@ -125,7 +115,7 @@ of a course). My repo has HTML lessons plus a PHP/SQLite app.
 Please explain:
 1. What "static hosting" means, and why PHP does not run on
    GitHub Pages.
-2. What "Deploy from a branch" does when I save Settings &gt; Pages.
+2. What the GitHub Actions source does in Settings &gt; Pages.
 3. How I could host the static lessons there while running the
    PHP app somewhere else.
 

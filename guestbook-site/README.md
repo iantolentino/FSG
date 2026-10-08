@@ -83,7 +83,7 @@ pages need the command above (see lesson 12).
 ## Deploy
 
 - **GitHub (repo):** lesson 7
-- **GitHub Pages (static lessons only):** lesson 8
+- **GitHub Pages (static lessons only):** the repository's Actions workflow publishes lessons 01–03 and 07–13 at <https://iantolentino.github.io/FSG/>. Enable it once in Settings → Pages → Source → GitHub Actions.
 - **Vercel Hobby (static lessons only):** lesson 9
 - **Vercel + free Neon Postgres (optional appendix):** lesson 10
 - **cPanel (the full PHP + SQLite CRUD app):** lesson 11 ← the live app
