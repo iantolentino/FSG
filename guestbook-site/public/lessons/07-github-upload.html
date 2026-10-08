@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 7 · Upload the project to GitHub</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.php">📖 The Guestbook Course</a>
+      <button class="menu-button" type="button" data-menu-button
+              aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Lessons</span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Lessons">
+        <ul>
+          <li><a href="../index.php">Home</a></li>
+          <li><a href="01-glimpse.html">01 · Glimpse</a></li>
+          <li><a href="02-html-css.html">02 · HTML + CSS</a></li>
+          <li><a href="03-html-css-js.html">03 · + JavaScript</a></li>
+          <li><a href="04-html-css-js-php.php">04 · + PHP</a></li>
+          <li><a href="05-html-css-js-php-sqlite.php">05 · + SQLite</a></li>
+          <li><a href="06-final-htmx.php">06 · Final + HTMX</a></li>
+          <li><a href="07-github-upload.html" aria-current="page">07 · GitHub</a></li>
+          <li><a href="08-github-pages.html">08 · GitHub Pages</a></li>
+          <li><a href="09-vercel.html">09 · Vercel</a></li>
+          <li><a href="10-vercel-free-database.html">10 · Free database</a></li>
+          <li><a href="11-cpanel-deploy.html">11 · cPanel</a></li>
+          <li><a href="12-vscode-editing.html">12 · VS Code</a></li>
+          <li><a href="13-ai-test-and-review.html">13 · AI review</a></li>
+          <li><a href="../app/index.php">Guestbook app</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="main">
+    <h1>Lesson 7 — upload the project to GitHub</h1>
+
+    <section aria-labelledby="what-youll-learn">
+      <h2 id="what-youll-learn">What you'll learn</h2>
+      <ul>
+        <li>What Git and GitHub are (they are NOT the same thing).</li>
+        <li>Method A: uploading with the terminal (git commands).</li>
+        <li>Method B: uploading by dragging files on github.com.</li>
+        <li>Why <code>.gitignore</code> keeps the database out of the repo.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="glimpse">
+      <h2 id="glimpse">Glimpse</h2>
+      <p>
+        When this lesson is done, your project looks like this on
+        <code>github.com/your-name/guestbook-site</code> — every file in the
+        browser, with its history:
+      </p>
+      <pre><code>guestbook-site/            (the repository root)
+  public/                  index.php, lessons/, app/, assets/
+  src/                     config.php
+  data/                    .gitkeep only — NO guestbook.sqlite!
+  .gitignore
+  README.md</code></pre>
+      <p class="tip">
+        Git = the version-control tool that records snapshots of your files,
+        running on YOUR computer. GitHub = a website that stores those
+        snapshots online and lets other people see them.
+      </p>
+    </section>
+
+    <section aria-labelledby="code-to-add">
+      <h2 id="code-to-add">Code to add / run</h2>
+
+      <h3>Method A — with the terminal</h3>
+      <p>
+        Open a terminal INSIDE your project folder (in VS Code: menu
+        Terminal &rarr; New Terminal). Then run these commands one by one.
+        Each line is explained below.
+      </p>
+      <pre><code>git init
+git add .
+git commit -m "First version of the guestbook course"
+git branch -M main
+git remote add origin https://github.com/YOUR-NAME/guestbook-site.git
+git push -u origin main</code></pre>
+      <ul>
+        <li><code>git init</code> — turn this folder into a Git repository
+          (a "repo": a project Git watches).</li>
+        <li><code>git add .</code> — stage (select) every file for the next
+          snapshot. The dot means "everything here".</li>
+        <li><code>git commit -m "..."</code> — save a snapshot with a short
+          description. Nothing is on the internet yet.</li>
+        <li><code>git branch -M main</code> — name the current line of
+          history "main" (GitHub's default name).</li>
+        <li><code>git remote add origin URL</code> — connect your local repo
+          to the empty GitHub repo you created on the website.</li>
+        <li><code>git push -u origin main</code> — upload the snapshot to
+          GitHub. <code>-u</code> remembers the link for next time; then
+          <code>git push</code> alone is enough.</li>
+      </ul>
+
+      <h3>Method B — by dragging files (no terminal)</h3>
+      <ol>
+        <li>Create an account on <strong>github.com</strong> if you do not
+          have one.</li>
+        <li>Click the <strong>+</strong> (top right) &rarr;
+          <strong>New repository</strong>. Name it
+          <code>guestbook-site</code>. Keep it Public. Do NOT tick "add a
+          README" (you already have one). Click <strong>Create</strong>.</li>
+        <li>On the new empty repo page, click the link
+          <strong>uploading an existing file</strong>.</li>
+        <li>Drag the CONTENTS of your project folder (the files inside it)
+          into the drop area.</li>
+        <li>Type a message like "First version" and click
+          <strong>Commit changes</strong>.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="why-gitignore">
+      <h2 id="why-gitignore">Why .gitignore and .gitkeep matter</h2>
+      <div class="caution">
+        <p>
+          <code>.gitignore</code> lists files Git should NEVER save. Our file
+          ignores <code>data/*.sqlite</code>: your database holds real visitor
+          messages and must not land in a public repo. GitHub is public —
+          anything pushed there can be read by anyone.
+        </p>
+        <p>
+          But Git does not track empty folders, and on some hosts the
+          <code>data/</code> folder must exist before the first run. The
+          empty file <code>data/.gitkeep</code> is the usual trick: a file
+          with no content, just so Git has something to save inside
+          <code>data/</code>.
+        </p>
+        <p>
+          After the first run on a server, <code>guestbook.sqlite</code> is
+          created by PHP and stays only on that server. Its content is yours
+          to manage; the repo never sees it.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="check-it-works">
+      <h2 id="check-it-works">Check it works</h2>
+      <ol>
+        <li>Open <code>https://github.com/YOUR-NAME/guestbook-site</code> in
+          a browser.</li>
+        <li>You see the same folder tree as on your computer.</li>
+        <li>Click <code>data/</code>: only <code>.gitkeep</code> is there.</li>
+        <li>Check the repo file list: no <code>.sqlite</code> file anywhere.</li>
+        <li>(Terminal users) Run <code>git status</code> later — it shows
+          which files changed and are not committed yet.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="ask-your-ai">
+      <h2 id="ask-your-ai">Ask your AI</h2>
+      <pre><code>I am a complete beginner using Git and GitHub for the first time.
+I am on Lesson 7 of "The Guestbook Course".
+
+Please explain:
+1. The difference between git (the tool) and GitHub (the website).
+2. What init, add, commit, branch, remote, and push each do — one
+   sentence each, with an everyday-life comparison.
+3. What a .gitignore file is for, and why I would add an empty
+   .gitkeep file to keep a folder in a repo.
+
+Then give me a practice exercise: undo a commit safely.</code></pre>
+    </section>
+
+    <label class="mark-done">
+      <input type="checkbox" data-lesson-done="07-github-upload">
+      Mark as done
+    </label>
+
+    <div class="pager">
+      <a href="06-final-htmx.php">&larr; Lesson 6</a>
+      <a href="08-github-pages.html">Next: Lesson 8 — GitHub Pages &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>The Guestbook Course · Lesson 7 of 13</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

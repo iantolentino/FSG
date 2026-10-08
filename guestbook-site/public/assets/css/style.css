@@ -1,0 +1,862 @@
+/* ============================================================
+   style.css ? the one stylesheet for the whole site.
+   ------------------------------------------------------------
+   Written mobile-first: the phone styles come first, then we
+   add bigger-screen rules inside @media (min-width: ...) blocks.
+   No CSS framework is used ? everything is plain CSS3.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. Design tokens (CSS custom properties / "variables")
+   ------------------------------------------------------------ */
+:root {
+  /* Light theme colors (the default). */
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-border: #d8dee6;
+  --color-text: #1c2733;
+  --color-text-muted: #4f5b66;
+  --color-accent: #1a5fb4;
+  --color-accent-hover: #164a8f;
+  --color-accent-contrast: #ffffff;
+  --color-danger: #b3261e;
+  --color-danger-bg: #fdecea;
+  --color-success-bg: #e6f4ea;
+  --color-success-text: #1a7f37;
+  --color-code-bg: #eef1f5;
+  --color-code-border: #cfd8e3;
+  --color-focus: #ff9900;
+
+  /* Shadows and spacing scale. */
+  --shadow-1: 0 1px 3px rgba(20, 30, 40, 0.08);
+  --shadow-2: 0 4px 12px rgba(20, 30, 40, 0.10);
+  --radius: 8px;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+
+  /* Fluid type: grows with the screen, never too small or huge. */
+  --fs-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --fs-h1: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --fs-h2: clamp(1.35rem, 1.2rem + 0.8vw, 1.8rem);
+  --fs-h3: clamp(1.1rem, 1.05rem + 0.3vw, 1.3rem);
+  --fs-small: clamp(0.82rem, 0.8rem + 0.15vw, 0.9rem);
+}
+
+/* Dark theme: the browser applies this automatically when the
+   visitor's device asks for it (prefers-color-scheme: dark). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #14181d;
+    --color-surface: #1d232b;
+    --color-border: #343d47;
+    --color-text: #e8edf2;
+    --color-text-muted: #a7b3bd;
+    --color-accent: #6aa9f5;
+    --color-accent-hover: #8cbeff;
+    --color-accent-contrast: #10161c;
+    --color-danger: #ff7b73;
+    --color-danger-bg: #3a1d1b;
+    --color-success-bg: #14301f;
+    --color-success-text: #58d67f;
+    --color-code-bg: #262d36;
+    --color-code-border: #3a434e;
+  }
+}
+
+/* ------------------------------------------------------------
+   2. Reset and base elements
+   ------------------------------------------------------------ */
+
+/* A tiny, modern reset: consistent box sizes and margins. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Smooth jumps when clicking #anchors, unless reduced motion wins. */
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+/* Stop long words and long code from stretching the page sideways.
+   text wraps instead of creating a horizontal scrollbar. Note: no
+   non-English characters appear anywhere in this file's comments. */
+body,
+p,
+li,
+h1, h2, h3, h4,
+dd, dt, td, th, figcaption {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  margin: 0 0 var(--space-3);
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); margin-top: var(--space-5); }
+h3 { font-size: var(--fs-h3); margin-top: var(--space-4); }
+
+p {
+  margin: 0 0 var(--space-3);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+img,
+video,
+iframe,
+embed,
+object {
+  /* Never let media break out of (or overflow) its container. */
+  max-width: 100%;
+  height: auto;
+}
+
+/* Every interactive element gets a clear, visible focus outline. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Respect visitors who turn animations off in their OS settings. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   3. Skip-to-content link (accessibility)
+   ------------------------------------------------------------ */
+/* Hidden until focused: keyboard users Tab onto it first and it
+   jumps them past the header/navigation to the main content. */
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: -100%; /* park it off-screen */
+  z-index: 100;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.skip-link:focus {
+  top: 0; /* slide it into view when focused */
+}
+
+/* ------------------------------------------------------------
+   4. Header, language-free JS rule: selectors below style the
+   site chrome (header, nav, footer) shared by every page.
+   ------------------------------------------------------------ */
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-1);
+}
+
+.site-header .container {
+  display: flex;
+  flex-direction: column; /* mobile-first: brand on top, button + menu below */
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--color-accent);
+}
+
+/* The round menu button (only visible on small screens, see media
+   query near the end of this file). It is a real <button> in the
+   HTML with aria-expanded, so screen readers announce it properly. */
+.menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: 44px;       /* touch-target minimum (44x44 px) */
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.menu-button:hover {
+  background: var(--color-bg);
+}
+
+/* Button's own icon box, drawn with pure CSS (no image needed). */
+.menu-button .menu-icon {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  position: relative;
+}
+
+.menu-button .menu-icon::before,
+.menu-button .menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.menu-button .menu-icon::before { top: 30%; }
+.menu-button .menu-icon::after  { bottom: 30%; }
+
+/* The lesson navigation list. */
+.site-nav {
+  display: none; /* hidden on phones until the menu button opens it */
+}
+
+.site-nav.is-open {
+  display: block;
+}
+
+.site-nav ul,
+.progress-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.site-nav a,
+.progress-list a {
+  display: inline-block;
+  min-height: 44px;              /* touch target */
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.site-nav a:hover,
+.progress-list a:hover {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+.site-nav a[aria-current="page"] {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   5. Page layout helpers
+   ------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: 72rem; /* 1152px */
+  margin-inline: auto;
+  padding-inline: clamp(0.75rem, 4vw, 1.5rem);
+}
+
+main {
+  padding-block: var(--space-4);
+}
+
+main.container {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-5);
+}
+
+/* Two-column layout for lesson pages on wide screens:
+   the lesson article main column + a "prev/next + progress" side. */
+.lesson-layout {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4);
+  margin-block: var(--space-3);
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding-block: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+.site-footer .container {
+  display: grid;
+  gap: var(--space-2);
+}
+
+/* ------------------------------------------------------------
+   6. Code blocks
+   ------------------------------------------------------------ */
+/* Code always scrolls inside its own box and never stretches
+   the page horizontally, even with the longest line. */
+pre {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  overflow-x: auto;      /* horizontal scroll, contained */
+  overflow-y: hidden;
+  max-width: 100%;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+pre code {
+  display: block;
+  white-space: pre;        /* keep formatting? */
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* Inline code (inside a sentence). */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-code-border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.92em;
+}
+
+pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* The copy button sits above the code block (main.js adds one). */
+.code-block {
+  position: relative;
+  margin-block: var(--space-3);
+}
+
+.code-block .copy-btn {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-code-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--fs-small);
+  cursor: pointer;
+}
+
+.code-block .copy-btn:hover {
+  background: var(--color-code-bg);
+}
+
+/* ------------------------------------------------------------
+   7. Forms
+   ------------------------------------------------------------ */
+.form {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 34rem;
+}
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  min-height: 44px;      /* touch target height */
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.field textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--color-accent);
+}
+
+/* Error alert block + per-field error text. */
+.form-error {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: var(--fs-small);
+}
+
+/* Show a red border on fields the server flagged. */
+.field.has-error input,
+.field.has-error textarea {
+  border-color: var(--color-danger);
+}
+
+/* Success banner (lesson 4 demo). */
+.form-success {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+  border: 1px solid currentColor;
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+}
+
+/* Buttons must be big enough to tap easily. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: var(--color-accent-hover);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--color-accent);
+  border-color: var(--color-border);
+}
+
+.button-secondary:hover {
+  background: var(--color-bg);
+}
+
+.button-danger {
+  background: transparent;
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.button-danger:hover {
+  background: var(--color-danger-bg);
+}
+
+/* ------------------------------------------------------------
+   8. Lesson helper blocks ("What you'll learn", "Glimpse", etc.)
+   ------------------------------------------------------------ */
+.lesson-meta,
+.lesson-nav {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.learn-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.check-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: check;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.check-list li {
+  counter-increment: check;
+  padding-left: 2.2rem;
+  position: relative;
+}
+
+.check-list li::before {
+  content: counter(check);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  width: 1.6rem;
+  height: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-weight: 700;
+  font-size: var(--fs-small);
+}
+
+/* CAUTION / TIP boxes. */
+.caution {
+  border-left: 4px solid var(--color-danger);
+  background: var(--color-danger-bg);
+  padding: var(--space-3);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.tip {
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-bg);
+  padding: var(--space-3);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: var(--space-3);
+  font-size: var(--fs-small);
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+}
+
+th {
+  background: var(--color-code-bg);
+}
+
+/* Allow the troubleshooting table to scroll inside its own box
+   on tiny screens instead of stretching the page. */
+.table-wrap {
+  overflow-x: auto;
+  margin-block: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.table-wrap table {
+  margin: 0;
+  border: 0;
+  min-width: 40rem;
+}
+
+.table-wrap th,
+.table-wrap td {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ------------------------------------------------------------
+   9. Progress (index page + "Mark as done" checkbox)
+   ------------------------------------------------------------ */
+.progress-bar {
+  height: 0.8rem;
+  width: 100%;
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  width: 0%;                 /* main.js sets the real width */
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.progress-list a {
+  display: flex;
+  align-items: center;
+  min-width: 44px;
+}
+
+/* The "Mark as done" checkbox is styled but still a real input. */
+.mark-done {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mark-done input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  min-width: 24px;
+  min-height: 24px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   10. Guestbook list (app + lessons 5 and 6)
+   ------------------------------------------------------------ */
+.entry {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.entry-header {
+  display: flex;
+  flex-wrap: wrap;          /* lets buttons wrap below the name */
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.entry-name {
+  font-weight: 700;
+  margin: 0;
+}
+
+.entry-date {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+.entry-message {
+  margin: var(--space-2) 0;
+  white-space: pre-wrap; /* show line breaks the visitor typed */
+}
+
+.entry-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.entry-actions .button {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: var(--fs-small);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--color-text-muted);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-5) var(--space-3);
+}
+
+/* HTMX sends a spinner? We keep it simple: a small inline "busy"
+   indicator shown via the htmx-injected classes. */
+.htmx-indicator {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator {
+  opacity: 1;
+}
+
+/* Counter badge for the live message count. */
+.count-badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  border-radius: 999px;
+  padding: 0.15em 0.8em;
+  font-size: var(--fs-small);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+   11. Footer navigation (Previous / Next lesson)
+   ------------------------------------------------------------ */
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: space-between;
+  margin-top: var(--space-5);
+}
+
+.pager a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  text-decoration: none;
+}
+
+.pager a:hover {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+/* ------------------------------------------------------------
+   12. Bigger screens: tablet and up (space is available now)
+   ------------------------------------------------------------ */
+@media (min-width: 48em) {
+  /* Header: brand left, everything else in one row. */
+  .site-header .container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .menu-button {
+    display: none; /* the real always-visible menu replaces it */
+  }
+
+  /* The nav is always visible and becomes a horizontal flex row. */
+  .site-nav {
+    display: block;
+  }
+
+  .site-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    justify-content: flex-end;
+  }
+
+  .site-nav a {
+    padding: var(--space-1) var(--space-2);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* Lesson pages get the two-column layout: article + sidebar. */
+@media (min-width: 60em) {
+  .lesson-layout {
+    grid-template-columns: minmax(0, 1fr) 16rem;
+    align-items: start;
+  }
+
+  .lesson-side {
+    position: sticky;
+    top: var(--space-3);
+  }
+
+  /* The single glimpse/demo example blocks. */
+  .lesson-aside {
+    display: block;
+  }
+}
+
+/* ------------------------------------------------------------
+   13. Utility classes
+   ------------------------------------------------------------ */
+.badge {
+  display: inline-block;
+  font-size: var(--fs-small);
+  padding: 0.1em 0.7em;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-code-bg);
+  color: var(--color-text-muted);
+}
+
+.muted {
+  color: var(--color-text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.visually-hidden {
+  /* For screen-reader-only help text (e.g. required notes). */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

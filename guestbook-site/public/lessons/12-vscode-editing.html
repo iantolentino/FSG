@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 12 · Editing comfortably in VS Code</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="../index.php">📖 The Guestbook Course</a>
+      <button class="menu-button" type="button" data-menu-button
+              aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-icon" aria-hidden="true"></span>
+        <span>Lessons</span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Lessons">
+        <ul>
+          <li><a href="../index.php">Home</a></li>
+          <li><a href="01-glimpse.html">01 · Glimpse</a></li>
+          <li><a href="02-html-css.html">02 · HTML + CSS</a></li>
+          <li><a href="03-html-css-js.html">03 · + JavaScript</a></li>
+          <li><a href="04-html-css-js-php.php">04 · + PHP</a></li>
+          <li><a href="05-html-css-js-php-sqlite.php">05 · + SQLite</a></li>
+          <li><a href="06-final-htmx.php">06 · Final + HTMX</a></li>
+          <li><a href="07-github-upload.html">07 · GitHub</a></li>
+          <li><a href="08-github-pages.html">08 · GitHub Pages</a></li>
+          <li><a href="09-vercel.html">09 · Vercel</a></li>
+          <li><a href="10-vercel-free-database.html">10 · Free database</a></li>
+          <li><a href="11-cpanel-deploy.html">11 · cPanel</a></li>
+          <li><a href="12-vscode-editing.html" aria-current="page">12 · VS Code</a></li>
+          <li><a href="13-ai-test-and-review.html">13 · AI review</a></li>
+          <li><a href="../app/index.php">Guestbook app</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="main">
+    <h1>Lesson 12 — editing comfortably in VS Code</h1>
+
+    <section aria-labelledby="what-youll-learn">
+      <h2 id="what-youll-learn">What you'll learn</h2>
+      <ul>
+        <li>How to open the project folder the right way.</li>
+        <li>Which extensions to install (recommended in
+          <code>.vscode/extensions.json</code>).</li>
+        <li>When to use Live Server (static pages only).</li>
+        <li>How to run PHP locally with
+          <code>php -S localhost:8000 -t public</code>.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="glimpse">
+      <h2 id="glimpse">Glimpse</h2>
+      <p>
+        Two local servers, two jobs — mixing them up is the classic beginner
+        mistake:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Server</th>
+              <th scope="col">Command</th>
+              <th scope="col">Serves</th>
+              <th scope="col">Runs PHP?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Live Server</strong> (VS Code extension)</td>
+              <td>click "Go Live"</td>
+              <td>HTML/CSS/JS lessons</td>
+              <td>No — PHP files come out as raw text</td>
+            </tr>
+            <tr>
+              <td><strong>PHP built-in server</strong></td>
+              <td><code>php -S localhost:8000 -t public</code></td>
+              <td>everything</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="code-to-add">
+      <h2 id="code-to-add">Steps</h2>
+      <ol>
+        <li>
+          <strong>Open the folder, not a file.</strong> VS Code menu
+          File &rarr; Open Folder… &rarr; choose
+          <code>guestbook-site</code>. Opening the FOLDER (not a single
+          file) is what makes the editor understand your project.
+        </li>
+        <li>
+          <strong>Install the recommended extensions.</strong> VS Code pops
+          up a notification with the recommendations from
+          <code>.vscode/extensions.json</code>; install all three:
+          <ul>
+            <li><em>Intelephense</em> — understands PHP: autocomplete,
+              jump-to-definition, and error highlighting.</li>
+            <li><em>Live Server</em> — one-click local server for static
+              pages, with auto-reload on save.</li>
+            <li><em>Live Server (ms-vscode.live-server)</em> — the newer
+              official variant; either of the two works.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Static pages:</strong> click "Go Live" in the bottom-right
+          status bar. Your HTML lessons open with automatic reload whenever
+          you save a file.
+        </li>
+        <li>
+          <strong>PHP pages:</strong> use the terminal instead. In VS Code:
+          Terminal &rarr; New Terminal, then:
+          <pre><code>php -S localhost:8000 -t public</code></pre>
+          <code>-S localhost:8000</code> starts the server on port 8000;
+          <code>-t public</code> makes <code>public/</code> the web root.
+          Then open
+          <code>http://localhost:8000/lessons/06-final-htmx.php</code>.
+        </li>
+      </ol>
+      <div class="caution">
+        <p>
+          <strong>Run the PHP server from the PROJECT ROOT</strong> (the
+          folder that contains <code>public/</code>, <code>src/</code> and
+          <code>data/</code>). The page code points at
+          <code>../src/config.php</code> relative to the FILES — this always
+          resolves while PHP is started with
+          <code>-t public</code> from the root. If you start it inside
+          <code>public/</code>, the database and config land in the wrong
+          place or the include fails.
+        </p>
+        <p>
+          On the first run, the SQLite file is created automatically in
+          <code>data/</code>. If you get a permissions error, check that the
+          folder exists and is writable (<code>data/.gitkeep</code> keeps it
+          in Git even when empty).
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="check-it-works">
+      <h2 id="check-it-works">Check it works</h2>
+      <ol>
+        <li>Open the project folder in VS Code; the Explorer shows
+          public/, src/, data/.</li>
+        <li>The three recommended extensions appear under
+          Extensions &rarr; Installed.</li>
+        <li>"Go Live" serves <code>01-glimpse.html</code> and reloads on
+          save.</li>
+        <li><code>php -S localhost:8000 -t public</code> (from the root)
+          serves the lessons AND the app at
+          <code>http://localhost:8000/app/index.php</code>.</li>
+        <li>After first app load, <code>data/guestbook.sqlite</code> exists
+          on disk.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="ask-your-ai">
+      <h2 id="ask-your-ai">Ask your AI</h2>
+      <pre><code>I am a beginner setting up VS Code to edit a small PHP project
+(Lesson 12 of a course).
+
+Please explain:
+1. Why "Open Folder" is better than opening single files.
+2. What the Live Server extension does and when it is NOT enough
+   (PHP!).
+3. What each part of "php -S localhost:8000 -t public" means, and
+   why I must run it from the project root.
+4. What Intelephense gives me that plain VS Code does not.
+
+Then give me a checklist to verify my local setup works.</code></pre>
+    </section>
+
+    <label class="mark-done">
+      <input type="checkbox" data-lesson-done="12-vscode-editing">
+      Mark as done
+    </label>
+
+    <div class="pager">
+      <a href="11-cpanel-deploy.html">&larr; Lesson 11</a>
+      <a href="13-ai-test-and-review.html">Next: Lesson 13 — AI test &amp; review &rarr;</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>The Guestbook Course · Lesson 12 of 13</p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
