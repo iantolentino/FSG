@@ -2,6 +2,7 @@
 """Build the static subset of the Guestbook course for GitHub Pages."""
 
 from pathlib import Path
+import hashlib
 import re
 import shutil
 import sys
@@ -136,6 +137,14 @@ def prepare_lesson(document: str, filename: str) -> str:
     return document
 
 
+def version_assets(document: str) -> str:
+    # Changed assets get fresh URLs so returning visitors receive the new UI.
+    for asset in ('assets/css/style.css', 'assets/js/main.js'):
+        version = hashlib.sha256((SOURCE / asset).read_bytes()).hexdigest()[:12]
+        document = document.replace(f'{asset}"', f'{asset}?v={version}"')
+    return document
+
+
 def repair_pager_links(document: str, filename: str) -> str:
     def replace_php_link(match: re.Match[str]) -> str:
         href, attrs, label = match.groups()
@@ -175,9 +184,9 @@ def main() -> None:
         document = filter_static_navigation(document)
         document = repair_pager_links(document, filename)
         document = prepare_lesson(document, filename)
-        (lesson_output / filename).write_text(document, encoding="utf-8")
+        (lesson_output / filename).write_text(version_assets(document), encoding="utf-8")
 
-    (output / "index.html").write_text(index_html(), encoding="utf-8")
+    (output / "index.html").write_text(version_assets(index_html()), encoding="utf-8")
     (output / ".nojekyll").write_text("", encoding="utf-8")
 
 
