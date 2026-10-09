@@ -1,0 +1,6 @@
+{
+  "name": "north-studio-neon-exercise",
+  "private": true,
+  "type": "module",
+  "dependencies": { "@neondatabase/serverless": "^1.0.0" }
+}

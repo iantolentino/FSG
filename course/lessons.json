@@ -1,0 +1,665 @@
+[
+  {
+    "number": 1,
+    "slug": "01-workspace",
+    "title": "Set up your workspace",
+    "phase": "Start here",
+    "summary": "Install VS Code and learn the editing, preview, and debugging habits you will use throughout the course.",
+    "outcome": "A project folder you can open, edit, preview, and inspect independently.",
+    "prerequisite": "No programming experience needed.",
+    "sections": [
+      {
+        "heading": "The project you will build",
+        "html": "<p>North Studio is a fictional small business. You will build its landing page, then add a project-request form and a private dashboard. The dashboard will read, update, and delete the requests saved by the form. These files are separate from the course website.</p><p>HTML gives the page structure; CSS handles presentation; JavaScript adds browser behavior. Later, PHP receives requests on the server and SQLite keeps the data after the browser closes.</p>"
+      },
+      {
+        "heading": "Install and open VS Code",
+        "html": "<ol><li>Download VS Code from <a href=\"https://code.visualstudio.com/Download\">the official download page</a> and install the version for your operating system.</li><li>Create a folder named <code>studio-site</code> in a location you can find again.</li><li>Use <strong>File → Open Folder</strong> in VS Code and select that folder. The Explorer on the left shows your project files.</li><li>Create <code>index.html</code>, save it, and paste the small example below. Open the saved file in a browser.</li></ol>"
+      },
+      {
+        "heading": "Make your first edit",
+        "html": "<pre><code>&lt;!doctype html&gt;\n&lt;html lang=&quot;en&quot;&gt;\n&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;North Studio&lt;/title&gt;&lt;/head&gt;\n&lt;body&gt;&lt;h1&gt;North Studio&lt;/h1&gt;&lt;p&gt;My first project file.&lt;/p&gt;&lt;/body&gt;\n&lt;/html&gt;</code></pre><p>Change the sentence, save again, then reload the browser. VS Code edits the file; the browser displays it. They are different tools.</p>"
+      },
+      {
+        "heading": "Use the tools deliberately",
+        "html": "<ul><li><strong>Explorer:</strong> create, rename, and find files. Keep one project inside one folder.</li><li><strong>Terminal → New Terminal:</strong> run commands from the folder shown by its prompt. <code>cd</code> changes folders.</li><li><strong>Browser developer tools:</strong> inspect HTML and styles, read JavaScript errors in Console, and look at requests in Network.</li><li><strong>Preview:</strong> double-click HTML for the first exercise. A trusted local preview extension is convenient later. PHP pages need the PHP server introduced in lesson 7.</li><li><strong>Find and format:</strong> use the editor search and Format Document. Read a change before saving it.</li></ul>"
+      },
+      {
+        "heading": "Know the folder boundaries",
+        "html": "<pre><code>studio-site/\n  index.html   # the page, built in lesson 2\n  style.css    # design, added in lesson 3\n  main.js      # interaction, added in lesson 4</code></pre><p>The filenames are case sensitive on many hosts. Use relative links such as <code>style.css</code> so the same files work when uploaded.</p>"
+      }
+    ],
+    "checks": [
+      "Change the heading and verify the browser shows your saved version.",
+      "Find the exact location of index.html on disk.",
+      "Open the terminal and confirm it starts in studio-site.",
+      "Find the browser Console and Network tabs."
+    ],
+    "challenge": "Create an about.html file and link to it from index.html. Confirm the relative link opens the file.",
+    "ai": "Explain the difference between an editor, a browser, and a local server using my studio-site folder. Then give me three editing exercises. Do not replace my project files.",
+    "files": [],
+    "preview": null,
+    "download": null,
+    "references": [
+      [
+        "VS Code terminal guide",
+        "https://code.visualstudio.com/docs/terminal/getting-started"
+      ]
+    ]
+  },
+  {
+    "number": 2,
+    "slug": "02-html-landing",
+    "title": "Build a plain HTML landing page",
+    "phase": "Build the frontend",
+    "summary": "Turn a blank file into a useful landing page with navigation, sections, and a contact form.",
+    "outcome": "A complete North Studio landing page written in plain HTML.",
+    "prerequisite": "Complete lesson 1 and open studio-site in VS Code.",
+    "sections": [
+      {
+        "heading": "Start with content, then structure",
+        "html": "<p>Your visitor needs to know who the business is, what it offers, and what to do next. Build a header with navigation, a hero introduction, three services, an about section, a contact form, and a footer. Keep the page readable before applying any design.</p>"
+      },
+      {
+        "heading": "Build the page",
+        "html": "<ol><li>Open <code>index.html</code> and add the document type, language, head, and body.</li><li>Include a character encoding, viewport, meaningful title, and description in the head.</li><li>Use one <code>h1</code> for the main message. Use <code>h2</code> for each main section and <code>h3</code> for service names.</li><li>Use <code>nav</code>, <code>main</code>, <code>section</code>, and <code>footer</code> for their actual roles.</li><li>Connect each navigation link to a section id, for example <code>href=\"#services\"</code>.</li></ol>"
+      },
+      {
+        "heading": "A useful section",
+        "html": "<pre><code>&lt;section id=&quot;services&quot;&gt;\n  &lt;h2&gt;Built around your next step.&lt;/h2&gt;\n  &lt;article&gt;\n    &lt;h3&gt;Landing pages&lt;/h3&gt;\n    &lt;p&gt;A focused introduction to your business.&lt;/p&gt;\n  &lt;/article&gt;\n&lt;/section&gt;</code></pre><p>An opening and closing tag wrap an element. Attributes such as <code>id</code> add information to its opening tag. An id must be unique within the page.</p>"
+      },
+      {
+        "heading": "A form is a collection of named fields",
+        "html": "<pre><code>&lt;label for=&quot;email&quot;&gt;Your email&lt;/label&gt;\n&lt;input id=&quot;email&quot; name=&quot;email&quot; type=&quot;email&quot; required&gt;\n&lt;label for=&quot;message&quot;&gt;Project details&lt;/label&gt;\n&lt;textarea id=&quot;message&quot; name=&quot;message&quot; maxlength=&quot;1000&quot; required&gt;&lt;/textarea&gt;</code></pre><p><code>for</code> and <code>id</code> connect a label to its field. <code>name</code> identifies the value when the form is submitted. <code>required</code> is a browser check; server validation comes later. This version uses a GET preview and has no database. Use fictional values.</p>"
+      },
+      {
+        "heading": "Compare with the reference",
+        "html": "<p>Open the plain HTML project preview below. Its default browser styling is intentional. Read the complete reference file, then make your own changes in your project rather than editing the course website.</p>"
+      }
+    ],
+    "checks": [
+      "The page has one h1 and a descriptive browser title.",
+      "Each navigation link scrolls to the correct section.",
+      "Clicking a label focuses its corresponding field.",
+      "Submitting an empty required field is blocked by the browser.",
+      "The page works with no stylesheet and no script."
+    ],
+    "challenge": "Add a fourth service and a frequently asked questions section using details and summary.",
+    "ai": "Review my landing page HTML for headings, semantic elements, labels, and broken anchor links. Point out exact issues and explain why; preserve the North Studio content.",
+    "files": [
+      "projects/landing/01-html/index.html"
+    ],
+    "preview": "landing/01-html/index.html",
+    "download": "north-studio-01-html.zip",
+    "references": []
+  },
+  {
+    "number": 3,
+    "slug": "03-css-design",
+    "title": "Design a responsive landing page",
+    "phase": "Build the frontend",
+    "summary": "Give the same HTML a visual identity and make the layout work from phones to wide screens.",
+    "outcome": "A styled landing page with readable type, service cards, and responsive sections.",
+    "prerequisite": "Use the HTML landing page from lesson 2.",
+    "sections": [
+      {
+        "heading": "Keep structure and presentation separate",
+        "html": "<p>Create <code>style.css</code> alongside index.html and link it in the head. You keep the same business content; CSS changes its appearance. Select elements by tag, class, or relationship instead of repeating inline styles everywhere.</p><pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</code></pre>"
+      },
+      {
+        "heading": "Build a small design system",
+        "html": "<pre><code>:root {\n  --ink: #203331;\n  --green: #245d4e;\n  --paper: #faf8f3;\n}\n* { box-sizing: border-box; }\nbody {\n  margin: 0;\n  color: var(--ink);\n  background: var(--paper);\n  font: 16px/1.7 system-ui, sans-serif;\n}\n.wrap {\n  width: min(1120px, 100% - 48px);\n  margin-inline: auto;\n}</code></pre><p>The box model includes content, padding, border, and margin. <code>border-box</code> makes your declared width include padding and border. A shared wrapper prevents text from stretching across the entire display.</p>"
+      },
+      {
+        "heading": "Lay out the service cards",
+        "html": "<pre><code>.services {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 20px;\n}\n@media (max-width: 720px) {\n  .services, .about, .contact {\n    grid-template-columns: 1fr;\n  }\n}</code></pre><p>Grid handles the columns; a media query switches to one column when space is limited. Use flexible widths and let content determine the height. Avoid fixed widths that require the browser to scroll sideways.</p>"
+      },
+      {
+        "heading": "Style interactive elements",
+        "html": "<ol><li>Give links and buttons clear normal, hover, and keyboard focus states.</li><li>Use readable contrast and comfortable line spacing.</li><li>Make form controls full width inside their column, with labels above them.</li><li>Check a 320px viewport, a tablet width, and a desktop width in browser developer tools.</li><li>Fix the element causing overflow; do not hide the entire page overflow to conceal the problem.</li></ol>"
+      },
+      {
+        "heading": "Keep the HTML reusable",
+        "html": "<p>Add the reference classes to your existing HTML as needed: <code>wrap</code>, <code>hero</code>, <code>services</code>, <code>about</code>, and <code>contact</code>. The reference download contains the same landing page with its standalone stylesheet. It does not import the course design.</p>"
+      }
+    ],
+    "checks": [
+      "index.html loads style.css without a missing-file error.",
+      "Services appear in three columns on wide screens and one on phones.",
+      "The page has no horizontal document scrollbar at 320px.",
+      "Every form label is readable and every control can be reached with Tab.",
+      "Zooming the page does not hide the submit button."
+    ],
+    "challenge": "Change the brand colors and spacing using the variables while keeping contrast readable.",
+    "ai": "Review my index.html and style.css at 320px, 768px, and 1440px. Identify likely layout problems by selector. Suggest small changes and explain how I can verify them in a browser.",
+    "files": [
+      "projects/landing/02-css/index.html",
+      "projects/landing/02-css/style.css"
+    ],
+    "preview": "landing/02-css/index.html",
+    "download": "north-studio-02-css.zip",
+    "references": []
+  },
+  {
+    "number": 4,
+    "slug": "04-javascript-animation",
+    "title": "Add JavaScript and animation",
+    "phase": "Build the frontend",
+    "summary": "Add purposeful motion and form feedback without making the page depend on animation.",
+    "outcome": "A landing page with section reveals, reduced-motion support, and honest frontend form feedback.",
+    "prerequisite": "The responsive landing page from lesson 3.",
+    "sections": [
+      {
+        "heading": "Load JavaScript after the page content",
+        "html": "<p>Create <code>main.js</code> next to index.html. Load it before the closing body tag so the elements exist when your script selects them. Use the Console to find syntax errors before adding more behavior.</p><pre><code>&lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;</code></pre>"
+      },
+      {
+        "heading": "React to a browser event",
+        "html": "<pre><code>const form = document.querySelector(&#x27;#contact-form&#x27;);\nform.addEventListener(&#x27;submit&#x27;, (event) =&gt; {\n  event.preventDefault();\n  document.querySelector(&#x27;#form-status&#x27;).textContent =\n    &#x27;Preview only: connect the backend in lesson 9 to save a request.&#x27;;\n});</code></pre><p>The DOM is the browser representation of your HTML. <code>querySelector</code> finds an element; an event listener runs when something happens. <code>textContent</code> inserts text without treating it as HTML. This is still a frontend preview, so it must not claim to have saved a request.</p>"
+      },
+      {
+        "heading": "Reveal a section when it enters the viewport",
+        "html": "<pre><code>const reducedMotion = window.matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;).matches;\nif (!reducedMotion &amp;&amp; &#x27;IntersectionObserver&#x27; in window) {\n  document.documentElement.classList.add(&#x27;reveal-active&#x27;);\n  const observer = new IntersectionObserver((entries) =&gt; {\n    entries.forEach((entry) =&gt; {\n      if (entry.isIntersecting) {\n        entry.target.classList.add(&#x27;is-visible&#x27;);\n        observer.unobserve(entry.target);\n      }\n    });\n  }, { threshold: 0.1 });\n  document.querySelectorAll(&#x27;[data-reveal]&#x27;).forEach((section) =&gt; observer.observe(section));\n}</code></pre><p>Add <code>data-reveal</code> to the sections you want to animate. The stylesheet supplies the opacity and transform transitions. JavaScript activates them only when the required API is available and motion is allowed.</p>"
+      },
+      {
+        "heading": "Build a dependable interaction",
+        "html": "<ol><li>Use the complete CSS reveal rules from the reference stylesheet.</li><li>Keep all content visible by default, before JavaScript runs.</li><li>Scroll the page and confirm each section reveals once.</li><li>Enable reduced motion in your browser rendering tools and confirm the content remains visible without animation.</li><li>Submit a fictional inquiry and verify the preview message appears. No network API or database is involved yet.</li></ol>"
+      }
+    ],
+    "checks": [
+      "The Console has no uncaught errors.",
+      "Sections remain readable with JavaScript disabled.",
+      "Reduced-motion users get visible content without transitions.",
+      "The form feedback says preview only.",
+      "The page remains usable with the keyboard."
+    ],
+    "challenge": "Add a live character count for the project-details textarea without changing the backend behavior.",
+    "ai": "Review my main.js for event handling, reduced-motion support, and safe DOM updates. Explain any issue and propose a minimal fix rather than a new framework.",
+    "files": [
+      "projects/landing/03-javascript/index.html",
+      "projects/landing/03-javascript/style.css",
+      "projects/landing/03-javascript/main.js"
+    ],
+    "preview": "landing/03-javascript/index.html",
+    "download": "north-studio-03-javascript.zip",
+    "references": []
+  },
+  {
+    "number": 5,
+    "slug": "05-git-github",
+    "title": "Save your project with Git and GitHub",
+    "phase": "Publish the frontend",
+    "summary": "Record changes locally and upload your independent landing-page project to a GitHub repository.",
+    "outcome": "A GitHub repository containing index.html, style.css, and main.js at its root.",
+    "prerequisite": "Finish the animated landing page in lesson 4.",
+    "sections": [
+      {
+        "heading": "Understand what you are uploading",
+        "html": "<p>Git records snapshots on your computer. GitHub stores the repository online. Your course exercise is your own <code>studio-site</code> repository; you are not uploading the files of this teaching website. Make sure index.html is at the root of the folder you choose.</p>"
+      },
+      {
+        "heading": "Prepare the project",
+        "html": "<ol><li>Install Git from <a href=\"https://git-scm.com/downloads\">its official download page</a>. Restart the terminal after installation if the command is not found.</li><li>Open your studio-site folder in VS Code and open a terminal there.</li><li>Create a .gitignore file. Ignore credentials, local databases, and generated dependency folders before making a public repository.</li><li>Create an empty GitHub repository named studio-site. Do not add a separate initial README if you will push an existing local project.</li></ol>"
+      },
+      {
+        "heading": "Make your first commit and push",
+        "html": "<pre><code>git --version\ngit config --global user.name &quot;YOUR NAME&quot;\ngit config --global user.email &quot;YOUR COMMIT EMAIL&quot;\ngit init\ngit add index.html style.css main.js .gitignore\ngit commit -m &quot;Build North Studio landing page&quot;\ngit branch -M main\ngit remote add origin https://github.com/YOUR-USERNAME/studio-site.git\ngit push -u origin main</code></pre><p>Replace the identity and repository placeholders with your own values. Authentication for a push is separate from the displayed commit identity. Use GitHub-supported authentication rather than putting an access token in a project file.</p>"
+      },
+      {
+        "heading": "Ignore files that belong only on the server",
+        "html": "<pre><code>.env*\n!.env.example\nnode_modules/\ndata/*.sqlite*\nserver/config.local.php</code></pre><p>.gitignore helps prevent new files from being tracked; it does not remove a secret already committed. If a credential reaches a public commit, revoke it and follow GitHub guidance for removing sensitive history.</p>"
+      },
+      {
+        "heading": "Build a small update habit",
+        "html": "<pre><code>git status\ngit diff\ngit add index.html\ngit commit -m &quot;Clarify the landing page headline&quot;\ngit push</code></pre><p>Review the diff before committing. Save one understandable change per commit. If a push is rejected because the remote changed, inspect and integrate those changes before retrying.</p>"
+      }
+    ],
+    "checks": [
+      "The GitHub repository shows index.html at its root.",
+      "The CSS and JavaScript files are present.",
+      "Your project contains no real credentials or customer records.",
+      "A second small edit appears as a separate commit."
+    ],
+    "challenge": "Add a README that states what the landing page does and explains how to preview it.",
+    "ai": "Explain the staged changes shown by my git diff. Help me write a clear commit message. Do not ask for my GitHub token or suggest force-pushing.",
+    "files": [],
+    "preview": null,
+    "download": null,
+    "references": [
+      [
+        "Git documentation",
+        "https://git-scm.com/doc"
+      ],
+      [
+        "GitHub getting started",
+        "https://docs.github.com/en/get-started"
+      ]
+    ]
+  },
+  {
+    "number": 6,
+    "slug": "06-github-pages",
+    "title": "Publish your first landing page",
+    "phase": "Publish the frontend",
+    "summary": "Use GitHub Pages to turn your static landing-page repository into a public website.",
+    "outcome": "A live HTML/CSS/JavaScript landing page with working assets and section links.",
+    "prerequisite": "Your own studio-site repository from lesson 5.",
+    "sections": [
+      {
+        "heading": "Choose the correct publishing root",
+        "html": "<p>This exercise publishes your independent landing page. Its index.html is at the repository root. This course website uses a separate build workflow; you do not need to copy that workflow to publish your three-file project.</p>"
+      },
+      {
+        "heading": "Enable Pages",
+        "html": "<ol><li>Open your studio-site repository on GitHub.</li><li>Go to <strong>Settings → Pages</strong>.</li><li>For this simple project, choose <strong>Deploy from a branch</strong>, branch <strong>main</strong>, folder <strong>/ (root)</strong>, and save.</li><li>Wait for the Pages deployment to finish and open the URL shown in the Pages settings.</li><li>Use the deployment status in the Actions tab to investigate errors rather than repeatedly changing files.</li></ol>"
+      },
+      {
+        "heading": "Make project URLs work",
+        "html": "<pre><code>https://YOUR-USERNAME.github.io/studio-site/\n\n&lt;!-- Relative links work below the repository path. --&gt;\n&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;\n&lt;script src=&quot;main.js&quot;&gt;&lt;/script&gt;</code></pre><p>A leading slash such as <code>/style.css</code> requests a file at the domain root, which can be wrong for a project site under /studio-site/. Match filename capitalization exactly. The Network tab will show missing CSS or JavaScript files.</p>"
+      },
+      {
+        "heading": "Publish a small change",
+        "html": "<p>Change the headline locally, commit it, and push. Wait for the new deployment, then check the live page. If you see old content, confirm the deployed commit and refresh the browser before assuming the code failed.</p>"
+      },
+      {
+        "heading": "Recognize the current milestone",
+        "html": "<p>You have deployed a static frontend. Pages can serve HTML, CSS, JavaScript, and images. It will not execute the PHP API built in the next lessons. The form should still explain that it is a preview. Keep this live version while developing the full-stack version locally.</p>"
+      }
+    ],
+    "checks": [
+      "The live URL loads the landing page instead of a file listing or 404.",
+      "CSS and JavaScript load successfully in Network.",
+      "Navigation works under the repository path.",
+      "A new commit changes the live headline after deployment.",
+      "The contact form does not pretend to save requests."
+    ],
+    "challenge": "Share the URL with a classmate and have them check it on a phone.",
+    "ai": "Help me diagnose a GitHub Pages asset 404. Here are my repository filenames and the failed URL. Explain which relative path is wrong without changing my hosting provider.",
+    "files": [],
+    "preview": null,
+    "download": null,
+    "references": [
+      [
+        "GitHub Pages publishing sources",
+        "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site"
+      ]
+    ]
+  },
+  {
+    "number": 7,
+    "slug": "07-php-backend",
+    "title": "Set up a PHP backend",
+    "phase": "Build the backend",
+    "summary": "Learn the request/response cycle and run a backend separately from your static preview.",
+    "outcome": "A local PHP server with a JSON API, private configuration, and an admin session.",
+    "prerequisite": "A working landing page and a saved Git repository.",
+    "sections": [
+      {
+        "heading": "Give the landing page a server",
+        "html": "<p>The browser can display your form but cannot privately manage a shared database. A backend receives HTTP requests, checks their data, applies rules, and sends a response. Your PHP files run on the server; the browser receives JSON or HTML, not the PHP source.</p><p>Start the full-stack project in a separate working folder called <code>north-studio</code>. Copy your landing-page files into public/. Keep the Pages version as the earlier static milestone.</p>"
+      },
+      {
+        "heading": "Install PHP and check its extensions",
+        "html": "<ol><li>Install a supported PHP 8.x release (8.3 or later) from <a href=\"https://www.php.net/downloads.php\">PHP’s official downloads</a> or a local development package appropriate for your computer.</li><li>Make the php command available in your terminal. Run the commands below.</li><li>Check that PDO and pdo_sqlite are listed. On Windows, enable the SQLite extensions in the php.ini file reported by <code>php --ini</code> if they are missing.</li><li>Restart the local server after changing PHP configuration.</li></ol><pre><code>php --version\nphp --ini\nphp -m</code></pre>"
+      },
+      {
+        "heading": "Separate public files from private files",
+        "html": "<pre><code>north-studio/\n  public/\n    index.html\n    style.css\n    main.js\n    requests.html\n    dashboard.js\n    api.php\n  server/\n    bootstrap.php\n    config.example.php\n    config.local.php  # generated, ignored by Git\n  data/              # database storage, ignored by Git\n  tools/setup.php</code></pre><p>Serve only public/. A filename being difficult to guess is not access control. The configuration and database stay outside the document root.</p>"
+      },
+      {
+        "heading": "Create the local admin configuration and start",
+        "html": "<pre><code>cd north-studio\nphp tools/setup.php\nphp -S localhost:8000 -t public</code></pre><p>The setup tool asks you to choose an admin password of at least 12 characters. It writes a password hash to server/config.local.php. It does not commit that file. Open <code>http://localhost:8000/</code>. Stop the development server with Ctrl+C.</p>"
+      },
+      {
+        "heading": "Inspect an API response",
+        "html": "<p>Open <code>http://localhost:8000/api.php?action=session</code>. The API responds with a CSRF token and an authenticated flag. The browser keeps a session cookie; the token is used for state-changing requests. You will connect the real form in lesson 9. The example backend already includes the finished routes so you can compare your work.</p><pre><code>{&quot;csrf&quot;:&quot;a-random-token&quot;,&quot;authenticated&quot;:false}</code></pre><p>GET reads information. POST creates data or signs in. PATCH updates an existing record. DELETE removes a record. A response includes a status code as well as a body.</p>"
+      }
+    ],
+    "checks": [
+      "php --version and php -m show the required runtime and extensions.",
+      "The local landing page opens through localhost, not file://.",
+      "The session endpoint returns JSON.",
+      "Requesting /server/config.local.php does not expose the private configuration.",
+      "An unauthenticated request to action=list returns 401."
+    ],
+    "challenge": "Use the Network tab to identify the response status and Content-Type of the session endpoint.",
+    "ai": "Explain the HTTP request and response for my PHP session endpoint. Review the public/server/data separation and explain why config.local.php must stay outside public/.",
+    "files": [
+      "projects/full-stack/server/bootstrap.php",
+      "projects/full-stack/tools/setup.php"
+    ],
+    "preview": null,
+    "download": "north-studio-full-stack.zip",
+    "references": [
+      [
+        "PHP built-in development server",
+        "https://www.php.net/manual/en/features.commandline.webserver.php"
+      ],
+      [
+        "PDO SQLite",
+        "https://www.php.net/manual/en/ref.pdo-sqlite.php"
+      ]
+    ]
+  },
+  {
+    "number": 8,
+    "slug": "08-sqlite-crud",
+    "title": "Build the SQLite CRUD API",
+    "phase": "Build the backend",
+    "summary": "Save project requests and implement all four database operations behind the PHP API.",
+    "outcome": "A persistent requests table with validated Create, Read, Update, and Delete routes.",
+    "prerequisite": "Run the PHP project from lesson 7.",
+    "sections": [
+      {
+        "heading": "Turn an inquiry into a row",
+        "html": "<p>A database table stores one kind of record. Each project request has an id, a name, an email, project details, a status, and a creation time. The id distinguishes rows even when people have the same name. SQLite stores these records in a file that remains after a browser reload.</p><pre><code>CREATE TABLE IF NOT EXISTS requests (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  name TEXT NOT NULL,\n  email TEXT NOT NULL,\n  message TEXT NOT NULL,\n  status TEXT NOT NULL DEFAULT &#x27;new&#x27;,\n  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP\n);</code></pre>"
+      },
+      {
+        "heading": "Implement all four operations",
+        "html": "<pre><code>-- Create\nINSERT INTO requests (name, email, message) VALUES (:name, :email, :message);\n-- Read\nSELECT * FROM requests ORDER BY id DESC;\n-- Update\nUPDATE requests SET status = :status WHERE id = :id;\n-- Delete\nDELETE FROM requests WHERE id = :id;</code></pre><p>Execute these through PDO prepared statements. The bound values are separate from SQL syntax. Do not concatenate submitted names or messages into a SQL query. The example’s update route edits the name, email, message, and status together.</p>"
+      },
+      {
+        "heading": "Design the API contract",
+        "html": "<div class=\"table-wrap\"><table><thead><tr><th>Action</th><th>HTTP method</th><th>Who can use it?</th><th>Expected result</th></tr></thead><tbody><tr><td>create</td><td>POST</td><td>Visitor with CSRF token</td><td>201 and new id</td></tr><tr><td>list</td><td>GET</td><td>Signed-in admin</td><td>200 and request list</td></tr><tr><td>update</td><td>PATCH</td><td>Signed-in admin with CSRF token</td><td>200 and updated flag</td></tr><tr><td>delete</td><td>DELETE</td><td>Signed-in admin with CSRF token</td><td>200 and deleted flag</td></tr></tbody></table></div><p>The sign-in route checks the password hash and regenerates the session id. A page link called “Dashboard” does not protect the API; the server must check the session for each management action.</p>"
+      },
+      {
+        "heading": "Validate before writing",
+        "html": "<ul><li>Require a text name of at most 80 bytes, a valid email of at most 254 bytes, and project details of at most 1000 bytes in this example.</li><li>Reject invalid JSON and invalid positive integer ids.</li><li>Allow only the statuses new, in-progress, and done.</li><li>Return 422 for invalid fields, 404 for missing records, 401 for missing admin sign-in, and 403 for an invalid CSRF token.</li><li>Keep detailed errors in the private server log. Send a useful generic failure to the browser.</li></ul>"
+      },
+      {
+        "heading": "Send a request from the browser Console",
+        "html": "<pre><code>const session = await fetch(&#x27;api.php?action=session&#x27;).then(r =&gt; r.json());\nconst response = await fetch(&#x27;api.php?action=create&#x27;, {\n  method: &#x27;POST&#x27;,\n  headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27;, &#x27;X-CSRF-Token&#x27;: session.csrf },\n  body: JSON.stringify({name:&#x27;Ada&#x27;, email:&#x27;ada@example.com&#x27;, message:&#x27;A landing page for my shop.&#x27;})\n});\nconsole.log(response.status, await response.json());</code></pre><p>Run this while viewing the local landing page so the request uses the same origin and session. Wait a few seconds between creates; the exercise includes a short session-based submission delay. The authenticated management UI arrives in lesson 9.</p>"
+      }
+    ],
+    "checks": [
+      "Creating valid fictional data returns 201 and an id.",
+      "An empty name or malformed email is rejected with 422.",
+      "A request without a CSRF token is rejected with 403.",
+      "The data/studio.sqlite file is created outside public/.",
+      "A refresh or server restart keeps the saved data."
+    ],
+    "challenge": "Explain what would happen if a delete route accepted a name instead of a unique id.",
+    "ai": "Review my PHP CRUD API for prepared statements, server validation, authorization, CSRF checks, and error handling. Name the exact failing route and suggest the smallest fix.",
+    "files": [
+      "projects/full-stack/public/api.php",
+      "projects/full-stack/server/bootstrap.php"
+    ],
+    "preview": null,
+    "download": "north-studio-full-stack.zip",
+    "references": [
+      [
+        "PDO prepared statements",
+        "https://www.php.net/manual/en/pdo.prepare.php"
+      ],
+      [
+        "SQLite CREATE TABLE",
+        "https://www.sqlite.org/lang_createtable.html"
+      ]
+    ]
+  },
+  {
+    "number": 9,
+    "slug": "09-connect-crud",
+    "title": "Connect the landing page to CRUD",
+    "phase": "Build the backend",
+    "summary": "Wire the contact form to the API and complete an authenticated request-management dashboard.",
+    "outcome": "A working full-stack application: create from the landing page, then read, update, and delete in the dashboard.",
+    "prerequisite": "The PHP/SQLite API and configured admin password from lessons 7–8.",
+    "sections": [
+      {
+        "heading": "Replace preview feedback with a real request",
+        "html": "<p>Work on the landing page inside north-studio/public/. Replace the preview-only form listener from lesson 4 with the full-stack main.js reference. Keep the page and API on the same origin so your session cookie and relative API path work together.</p><pre><code>const session = await fetch(&#x27;api.php?action=session&#x27;).then(r =&gt; r.json());\nconst response = await fetch(&#x27;api.php?action=create&#x27;, {\n  method: &#x27;POST&#x27;,\n  headers: {&#x27;Content-Type&#x27;:&#x27;application/json&#x27;, &#x27;X-CSRF-Token&#x27;:session.csrf},\n  body: JSON.stringify(Object.fromEntries(new FormData(form)))\n});\nconst result = await response.json();\nif (!response.ok) throw new Error(result.error || &#x27;Could not save the request.&#x27;);</code></pre><p>A network request does not automatically mean success. Check response.ok before clearing the form or displaying a success message. Disable the submit button while waiting and re-enable it after either success or failure.</p>"
+      },
+      {
+        "heading": "Read the saved requests",
+        "html": "<p>Create requests.html with a login form and a workspace container. dashboard.js calls the login action and keeps the returned CSRF token. After sign-in, it loads action=list and creates a card for each record.</p><pre><code>const card = document.createElement(&#x27;article&#x27;);\nconst name = document.createElement(&#x27;h2&#x27;);\nname.textContent = request.name;\ncard.append(name);\nlist.append(card);</code></pre><p>Use textContent for values submitted by visitors. A request containing markup must be displayed as text, not executed as HTML. An empty database should display a friendly empty state.</p>"
+      },
+      {
+        "heading": "Update and delete deliberately",
+        "html": "<ol><li>Add an Edit request button that replaces the card with a form prefilled from the record.</li><li>Include a status select with new, in-progress, and done.</li><li>Send the record id and form values to action=update using PATCH and the current CSRF token.</li><li>On success, reload the list from the server. Cancel should restore the unchanged record.</li><li>Ask before deleting, send DELETE with the id, then reload the list.</li><li>Provide a Sign out button; after logout, the server must deny list, update, and delete again.</li></ol>"
+      },
+      {
+        "heading": "Run the complete acceptance flow",
+        "html": "<p>Use the full reference files below to compare your implementation. Open the landing page at localhost:8000, send a fictional request, then open requests.html and sign in with the password you chose in setup. Browser developer tools let you trace each API call and its status.</p><p>Creating and deleting real records are different from animating a card. Reload after every operation to confirm you changed the database, not only the DOM.</p>"
+      }
+    ],
+    "checks": [
+      "Submitting the landing-page form creates a row visible after admin sign-in.",
+      "Editing details and status survives a reload.",
+      "Cancel restores the old values.",
+      "Deleting removes the row and produces the empty state when no rows remain.",
+      "Signing out hides the workspace and the API returns 401 for management actions.",
+      "Invalid fields leave your input available and display the server error."
+    ],
+    "challenge": "Add a client-side status filter while keeping the server as the source of truth.",
+    "ai": "Review this end-to-end flow: landing form → PHP API → SQLite → dashboard. Find places where the UI can report success even though the server failed. Suggest concrete browser checks.",
+    "files": [
+      "projects/full-stack/public/main.js",
+      "projects/full-stack/public/dashboard.js",
+      "projects/full-stack/public/requests.html"
+    ],
+    "preview": null,
+    "download": "north-studio-full-stack.zip",
+    "references": []
+  },
+  {
+    "number": 10,
+    "slug": "10-cpanel",
+    "title": "Deploy the full app to cPanel",
+    "phase": "Deploy and extend",
+    "summary": "Upload HTML, CSS, JavaScript, PHP, and SQLite with the correct public and private boundaries.",
+    "outcome": "A deployed version of the working PHP/SQLite application on a compatible cPanel host.",
+    "prerequisite": "The complete local CRUD flow passes lesson 9.",
+    "sections": [
+      {
+        "heading": "Confirm the hosting requirements",
+        "html": "<p>This deployment path uses HTML, CSS, JavaScript, PHP, and SQLite only. It does not require Node.js, a JavaScript build system, or a managed SQL server. Confirm your hosting plan supports the PHP version, PDO SQLite, writable private storage, and HTTPS before uploading.</p>"
+      },
+      {
+        "heading": "Understand the domain document root",
+        "html": "<pre><code>home/your-account/\n  server/\n    bootstrap.php\n    config.local.php\n  data/\n    .htaccess\n  public_html/       # document root for this example\n    index.html\n    style.css\n    main.js\n    requests.html\n    dashboard.js\n    api.php</code></pre><p>For an additional domain the document root can have a different name. Check its actual location in cPanel. The sample API loads ../server/bootstrap.php; place server/ and data/ next to that document root. Keep tools/setup.php out of the public upload.</p>"
+      },
+      {
+        "heading": "Upload a clean release",
+        "html": "<ol><li>Run the setup tool locally and choose the deployment admin password. Keep config.local.php private.</li><li>Back up existing public files and the existing SQLite database before replacing anything.</li><li>Open File Manager, select the domain document root, and upload a zip containing only the contents of public/.</li><li>Extract the zip there and remove the uploaded archive. Confirm index.html is directly in the document root.</li><li>Upload server/ and data/ outside the document root. Include config.local.php through your private upload; it is intentionally missing from the course download.</li><li>Make data/ writable by the PHP process using the least permissions your host requires. Ask the host if its ownership model is unclear; do not make everything world writable.</li></ol>"
+      },
+      {
+        "heading": "Verify the real application",
+        "html": "<ol><li>Open the HTTPS landing page. Submit a fictional request.</li><li>Open requests.html, sign in, and confirm the request appears.</li><li>Edit and delete the request, then reload to verify persistence.</li><li>Confirm that a URL such as /server/config.local.php cannot download the private file.</li><li>If the API reports failure, read the host’s private PHP error log and check PDO SQLite and storage permissions.</li></ol>"
+      },
+      {
+        "heading": "Update files without losing data",
+        "html": "<p>The database is created on the first write. It is not part of every release zip. Uploading a new frontend should not replace an existing database with an empty one. Keep backups of private configuration and data, and test the complete CRUD flow after an update.</p><p>Use fictional data during the course. Before collecting real customer inquiries, add appropriate privacy handling and robust abuse protection; the example’s short per-session delay is not a complete rate limiter.</p>"
+      }
+    ],
+    "checks": [
+      "The live API executes PHP instead of downloading source.",
+      "PDO SQLite is enabled and data/ is writable by PHP.",
+      "The create/read/update/delete flow works over HTTPS.",
+      "Private config and database files cannot be downloaded through the public URL.",
+      "A frontend update preserves existing database records."
+    ],
+    "challenge": "Write a release checklist with one rollback step and one database-backup step.",
+    "ai": "Check my cPanel folder diagram against the API include paths. Explain which files belong in the document root and which must stay private. Do not request my hosting password.",
+    "files": [],
+    "preview": null,
+    "download": null,
+    "references": [
+      [
+        "cPanel File Manager",
+        "https://docs.cpanel.net/cpanel/files/file-manager/110/"
+      ]
+    ]
+  },
+  {
+    "number": 11,
+    "slug": "11-vercel",
+    "title": "Vercel, domains, and environments",
+    "phase": "Deploy and extend",
+    "summary": "Compare another static deployment path and learn how domains and server environment settings fit together.",
+    "outcome": "A Vercel deployment of the landing page and a clear understanding of deployment URLs, domains, and environment scope.",
+    "prerequisite": "Finish the complete core app; use the static landing snapshot for this exercise.",
+    "sections": [
+      {
+        "heading": "Choose the appropriate project version",
+        "html": "<p>Start with the animated HTML/CSS/JavaScript landing page from lesson 4. Import its Git repository into Vercel. This is a second deployment exercise. The complete PHP/SQLite version from lesson 10 stays on a PHP host; uploading it to a static Vercel project does not execute its PHP API.</p>"
+      },
+      {
+        "heading": "Deploy the static landing page",
+        "html": "<ol><li>Sign in to Vercel and import your studio-site GitHub repository.</li><li>For the plain static project, select the Other framework preset, leave the build command empty, and use the directory containing index.html as the output directory.</li><li>If importing a monorepo or the course example, choose projects/landing/03-javascript as the project root. Confirm the output points to that root, not the course website.</li><li>Deploy and inspect the generated deployment URL.</li><li>Push a small change and compare its preview deployment with the production deployment.</li></ol>"
+      },
+      {
+        "heading": "Understand a domain",
+        "html": "<p>A deployment URL identifies a deployed project. A custom domain is a name you control and point at it using DNS. In the project’s Domains settings, add your domain and follow the exact DNS records Vercel shows for that domain. Do not copy arbitrary DNS values from a tutorial; the dashboard tells you the required records and verification status.</p><p>You can finish the exercise using the supplied vercel.app URL. A purchased domain is optional. After DNS verification, confirm the correct project loads over HTTPS.</p>"
+      },
+      {
+        "heading": "Understand environment variables",
+        "html": "<p>An environment variable is a named setting available to server code. Development, Preview, and Production can use different values. A database connection string belongs on the server. Putting it in main.js, an HTML attribute, or a frontend build variable exposed to the browser makes it public.</p><pre><code>// Server function, not browser JavaScript\nconst connectionString = process.env.DATABASE_URL;</code></pre><p>A plain static page cannot privately read a server environment variable. Lesson 12 adds a Node.js function to use one. After changing a deployment environment variable, create a new deployment so the running code receives the new value.</p>"
+      },
+      {
+        "heading": "Keep local environment files out of Git",
+        "html": "<p>Use an .env.example containing names and placeholders as documentation. Actual .env files stay ignored. Check the environment selected when a preview fails but production works. Consult the private function logs rather than printing credentials in browser responses.</p>"
+      }
+    ],
+    "checks": [
+      "The Vercel static page loads CSS and JavaScript.",
+      "You can identify the active production deployment and its commit.",
+      "You can explain why a domain is different from a repository name.",
+      "You can distinguish Development, Preview, and Production settings.",
+      "No database credential appears in the frontend source or Git history."
+    ],
+    "challenge": "Create a preview deployment and compare it to production without changing a custom domain.",
+    "ai": "Explain why DATABASE_URL must be read by a server function rather than main.js. Use my static landing-page deployment as the example and help me trace which environment a deployment uses.",
+    "files": [],
+    "preview": null,
+    "download": "north-studio-03-javascript.zip",
+    "references": [
+      [
+        "Vercel domains",
+        "https://vercel.com/docs/domains/working-with-domains"
+      ],
+      [
+        "Vercel environment variables",
+        "https://vercel.com/docs/environment-variables"
+      ]
+    ]
+  },
+  {
+    "number": 12,
+    "slug": "12-hosted-database",
+    "title": "Connect a hosted database on Vercel",
+    "phase": "Deploy and extend",
+    "summary": "Set up a free-tier database option and use a server function to save a landing-page request.",
+    "outcome": "A Node.js function connected to Neon PostgreSQL, with a verified insert from the landing form.",
+    "prerequisite": "Understand server requests, CRUD, and Vercel environments from earlier lessons.",
+    "sections": [
+      {
+        "heading": "Transfer the database concepts",
+        "html": "<p>You already built complete authenticated CRUD with PHP and SQLite. This extension uses a different runtime and storage system: Node.js functions on Vercel and a hosted PostgreSQL database. The table and prepared-query ideas carry over; the connection code and deployment settings change.</p><p>The supplied Vercel starter implements a connection check and a public create endpoint. It does not include the PHP admin dashboard or claim to be a complete serverless CRUD port. Keep the full authenticated CRUD project as your core deliverable.</p>"
+      },
+      {
+        "heading": "Provision the database",
+        "html": "<ol><li>Open the Vercel project’s Storage or Marketplace integrations and choose Neon PostgreSQL.</li><li>Select an available free database tier after reading its current usage limits and billing options. Dashboard offerings can change.</li><li>Connect the database integration to the project. Inspect the server environment variable names it supplies.</li><li>The starter expects DATABASE_URL. If the integration used another name, add DATABASE_URL with the provider’s connection string for the environments you will use.</li><li>Open the provider’s SQL editor and run the included schema.sql once.</li><li>Redeploy the Vercel project after configuring environment variables.</li></ol>"
+      },
+      {
+        "heading": "Use the correct application layout",
+        "html": "<pre><code>vercel-neon/\n  package.json\n  package-lock.json\n  vercel.json\n  schema.sql\n  .env.example\n  api/health.js\n  api/request.js\n  public/index.html\n  public/style.css\n  public/main.js</code></pre><p>Import projects/vercel-neon as the Vercel project root, select Other, use no build command, and set the static output directory to public. The api/ directory contains server functions. The package installs the Neon driver. You do not upload a SQLite file to provide shared persistent storage for this exercise.</p>"
+      },
+      {
+        "heading": "Query from the server, using bound values",
+        "html": "<pre><code>import { neon } from &#x27;@neondatabase/serverless&#x27;;\nconst sql = neon(process.env.DATABASE_URL);\nconst rows = await sql`\n  INSERT INTO requests (name, email, message)\n  VALUES (${name}, ${email}, ${message})\n  RETURNING id\n`;</code></pre><p>The driver’s tagged template binds interpolated values as query parameters. Validate the input first. Keep the connection string on the server and return only the new record id to the browser. Do not expose a public list of inquiry emails.</p>"
+      },
+      {
+        "heading": "Verify the deployment",
+        "html": "<ol><li>Open /api/health on the deployment and expect a database-connected response.</li><li>Submit fictional data from the deployed landing page. The function checks the request origin and validates the fields.</li><li>Check the new row in Neon’s SQL editor. Reload and confirm it remains.</li><li>If the request fails, check function logs, DATABASE_URL scope, and whether schema.sql was executed.</li><li>Use separate preview data where appropriate, so exercises do not alter a production database.</li></ol>"
+      },
+      {
+        "heading": "Know the extension boundary",
+        "html": "<p>Free database tiers have resource limits; hosting and database quotas are separate. The demo create endpoint also needs stronger deployment-level abuse protection before handling real inquiries. As a further project, port the admin authentication, authorization, CSRF handling, read, update, and delete routes before calling a Vercel variant a complete replacement for the PHP app.</p>"
+      }
+    ],
+    "checks": [
+      "The connection string exists only in server configuration.",
+      "The health function confirms a real database connection.",
+      "A valid insert returns 201 and a record id.",
+      "Invalid input is rejected before the insert.",
+      "The inserted fictional record survives a new deployment."
+    ],
+    "challenge": "Write a comparison of SQLite-on-cPanel and PostgreSQL-with-Vercel: runtime, storage location, credentials, and persistence.",
+    "ai": "Review my Node.js database function for input validation, parameterized queries, exposed credentials, and error messages. Explain how its deployment differs from the PHP/SQLite core app.",
+    "files": [
+      "projects/vercel-neon/api/health.js",
+      "projects/vercel-neon/api/request.js",
+      "projects/vercel-neon/schema.sql"
+    ],
+    "preview": null,
+    "download": "north-studio-vercel-neon.zip",
+    "references": [
+      [
+        "Vercel storage integrations",
+        "https://vercel.com/docs/marketplace-storage"
+      ],
+      [
+        "Neon integration",
+        "https://vercel.com/marketplace/neon/neon"
+      ],
+      [
+        "Vercel Node.js runtime",
+        "https://vercel.com/docs/functions/runtimes/node-js"
+      ],
+      [
+        "Neon serverless driver",
+        "https://neon.com/blog/serverless-driver-ga"
+      ]
+    ]
+  },
+  {
+    "number": 13,
+    "slug": "13-ai-review",
+    "title": "Use AI and finish your capstone",
+    "phase": "Practice and review",
+    "summary": "Use AI as a development partner, verify its suggestions, and finish a project you can explain.",
+    "outcome": "A reviewed landing page and working CRUD backend, with a README and evidence that the important flows pass.",
+    "prerequisite": "Complete the landing-page and PHP/SQLite project. The Vercel extension is optional.",
+    "sections": [
+      {
+        "heading": "Use AI at the right level",
+        "html": "<p>AI can explain unfamiliar code, help isolate a bug, suggest a small change, or review a patch. Start with a clear goal and the relevant file. Ask it to explain assumptions. You remain responsible for applying the change and verifying the result in the browser.</p><p>You can use the Ask AI prompts throughout the course earlier; this final lesson puts those habits together. Do not paste hosting passwords, tokens, database connection strings, or actual customer inquiries into prompts.</p>"
+      },
+      {
+        "heading": "Make a useful debugging prompt",
+        "html": "<pre><code>Goal: the landing-page form must save one project request.\nActual result: the browser receives HTTP 422.\nExpected result: HTTP 201 and a new request id.\nRelevant files: public/main.js and public/api.php.\nNetwork response: [paste the sanitized error body].\n\nExplain the likely cause using these files. Propose the smallest\nchange, explain why it works, and give browser steps to verify it.\nKeep the existing PHP/SQLite architecture.</code></pre><p>A specific symptom and expected result are more useful than “fix my whole app.” Include the smallest relevant context. Read the proposed diff before applying it.</p>"
+      },
+      {
+        "heading": "Work in a controlled loop",
+        "html": "<ol><li>Commit the current working version so you have a reference.</li><li>Choose one problem: a broken layout, validation behavior, or a failed API call.</li><li>Ask for a diagnosis and a small patch, not an unexplained replacement application.</li><li>Apply only the change you understand.</li><li>Repeat the original failure case, then run the create/read/update/delete flow to catch regressions.</li><li>Keep the change if the evidence supports it and write a clear commit message.</li></ol>"
+      },
+      {
+        "heading": "Review the application, not only the appearance",
+        "html": "<ul><li><strong>Responsive UI:</strong> check 320px, tablet, and desktop; inspect long code and error messages.</li><li><strong>Accessibility:</strong> use Tab, Enter, and Escape; check labels, focus, reduced motion, and status announcements.</li><li><strong>Data:</strong> create, refresh, edit, cancel, delete, and restart the server.</li><li><strong>Access:</strong> verify management routes deny signed-out users and reject missing CSRF tokens.</li><li><strong>Security basics:</strong> use prepared statements, validate on the server, display submitted text safely, and keep configuration and data private.</li><li><strong>Deployment:</strong> confirm the live version’s paths and runtime, and preserve the existing database during an update.</li></ul>"
+      },
+      {
+        "heading": "Your final deliverables",
+        "html": "<ol><li>Publish the static landing-page milestone on GitHub Pages.</li><li>Keep a runnable local PHP/SQLite full-stack project with all four CRUD operations.</li><li>Complete the cPanel deployment if you have a compatible host; otherwise document the exact upload layout and local test results.</li><li>Include a README with setup commands, required extensions, project structure, admin configuration, and deployment boundaries.</li><li>Record the checks you performed and any known limitations.</li><li>Explain the journey of one form submission from browser to API to database and back.</li></ol>"
+      },
+      {
+        "heading": "A final review prompt",
+        "html": "<pre><code>Review my North Studio landing page and PHP/SQLite CRUD project.\nFor every finding, cite the file and relevant function or selector.\nGroup findings by broken behavior, accessibility, and data access.\nSeparate confirmed issues from assumptions you want me to verify.\nDo not invent test results. Do not migrate the project to a framework.\nGive a short acceptance checklist for the proposed fixes.</code></pre>"
+      }
+    ],
+    "checks": [
+      "You can explain one complete request from form input to saved database row.",
+      "The create/read/update/delete flow passes after your final changes.",
+      "Signed-out users cannot manage records through direct API calls.",
+      "Your GitHub repository excludes secrets and database files.",
+      "The README lets another person run the app without guessing.",
+      "You understand every AI-generated change you kept."
+    ],
+    "challenge": "Record a short walkthrough showing the landing page, a saved inquiry, an edit, a delete, and a rejected signed-out API request.",
+    "ai": "Act as a reviewer for my capstone. Ask me to explain the request/response flow, the difference between browser and server validation, and why the database is outside public/. Then review only the files I provide.",
+    "files": [],
+    "preview": null,
+    "download": "north-studio-full-stack.zip",
+    "references": []
+  }
+]

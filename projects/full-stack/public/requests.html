@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project requests | North Studio</title><link rel="stylesheet" href="style.css"></head>
+<body><header class="site-header wrap"><a class="logo" href="index.html">North Studio<span>Project request dashboard</span></a><a href="index.html">Back to landing page</a></header>
+<main class="wrap dashboard"><h1>Project requests</h1><p>Review, update, and remove requests submitted from your landing page.</p>
+<p id="dashboard-status" role="status" aria-live="polite"></p>
+<section id="login-panel" class="panel"><h2>Studio sign in</h2><form id="login-form"><label for="password">Admin password</label><input type="password" id="password" name="password" autocomplete="current-password" required><button class="button">Sign in</button></form></section>
+<section id="workspace" hidden><div class="actions"><button class="button secondary" id="refresh">Refresh requests</button><button class="button secondary" id="logout">Sign out</button></div><div id="requests"></div></section>
+</main><script src="dashboard.js"></script></body></html>
