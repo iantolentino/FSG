@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 /*
  * main.js — the one JavaScript file for the whole site.
  *
@@ -229,11 +231,26 @@ function initMenuButton() {
 /* ============================================================
    6. Start everything once the page is ready
    ============================================================ */
+function initLiveCounts() {
+  document.querySelectorAll('[data-live-count]').forEach((form) => {
+    const message = form.querySelector('[name="message"]');
+    const output = form.querySelector('output');
+    if (!message || !output) return;
+    const update = () => { output.textContent = String(message.value.length); };
+    message.addEventListener('input', update);
+    update();
+  });
+}
+
 function initMain() {
   initProgressCheckboxes();
   renderProgressBar();
+  document.querySelectorAll('[data-lesson-status]').forEach((status) => {
+    status.textContent = readProgress()[status.dataset.lessonStatus] ? ' / Completed' : '';
+  });
   initCopyButtons();
   initMenuButton();
+  initLiveCounts();
 }
 
 if (document.readyState === 'loading') {

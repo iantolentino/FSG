@@ -27,13 +27,9 @@ require_once __DIR__ . '/../src/config.php';
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.php">📖 The Guestbook Course</a>
-      <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="site-nav">
-        <span class="menu-icon" aria-hidden="true"></span>
-        <span>Lessons</span>
-      </button>
+  <header class="site-header"><div class="container">
+      <a class="brand" href="index.php"><span class="brand-mark" aria-hidden="true">G</span><span>Guestbook<span class="brand-subtitle">A course in building for the web</span></span></a>
+      <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Lessons</button>
       <nav class="site-nav" id="site-nav" data-site-nav aria-label="Lessons">
         <ul>
           <li><a href="index.php" aria-current="page">Home</a></li>
@@ -50,11 +46,10 @@ require_once __DIR__ . '/../src/config.php';
           <li><a href="lessons/11-cpanel-deploy.html">11 · cPanel</a></li>
           <li><a href="lessons/12-vscode-editing.html">12 · VS Code</a></li>
           <li><a href="lessons/13-ai-test-and-review.html">13 · AI review</a></li>
-          <li><a href="app/index.php">💬 Guestbook app</a></li>
+          <li><a href="app/index.php"> Guestbook app</a></li>
         </ul>
       </nav>
-    </div>
-  </header>
+    </div></header>
 
   <main class="container" id="main">
     <h1>From plain HTML to a live CRUD app</h1>

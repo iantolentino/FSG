@@ -36,9 +36,24 @@ LESSON_TITLES = (
 )
 
 
+def site_header(prefix: str, current: str = "index.html") -> str:
+    home_current = ' aria-current="page"' if current == "index.html" else ""
+    links = [f'<li><a href="{prefix}index.html"{home_current}>Course overview</a></li>']
+    for filename, title in LESSON_TITLES:
+        number, label = title.split(" · ", 1)
+        active = ' aria-current="page"' if filename == current else ""
+        links.append(f'<li><a href="{prefix}lessons/{filename}"{active}><span class="nav-number">{number}</span>{label}</a></li>')
+    return f'''<header class="site-header"><div class="container">
+      <a class="brand" href="{prefix}index.html"><span class="brand-mark" aria-hidden="true">G</span><span>Guestbook<span class="brand-subtitle">A course in building for the web</span></span></a>
+      <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Lessons</button>
+      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Course"><p class="nav-label">LEARN AT YOUR OWN PACE</p><ul>{''.join(links)}</ul>
+      <a class="nav-resource" href="https://github.com/iantolentino/FSG">View project on GitHub</a></nav>
+    </div></header>'''
+
+
 def index_html() -> str:
     links = "\n".join(
-        f'        <li><a href="lessons/{filename}">{title}</a></li>'
+        f'<li><a href="lessons/{filename}"><span class="lesson-number">{title.split(" · ")[0]}</span><span><strong>{title.split(" · ")[1]}</strong><span class="lesson-link-label">Read lesson <span data-lesson-status="{filename[:-5]}"></span></span></span><span class="card-arrow" aria-hidden="true">&rarr;</span></a></li>'
         for filename, title in LESSON_TITLES
     )
     return f'''<!doctype html>
@@ -49,29 +64,30 @@ def index_html() -> str:
   <title>The Guestbook Course</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="course-home">
   <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">📖 The Guestbook Course</a>
-    </div>
-  </header>
+  {site_header('')}
   <main class="container" id="main">
-    <h1>The Guestbook Course</h1>
-    <p>A beginner course that builds a guestbook from HTML through to a PHP and SQLite app.</p>
+    <div class="course-hero">
+      <p class="eyebrow">THE GUESTBOOK COURSE</p>
+      <h1>Small steps.<br>A real web app.</h1>
+      <p class="hero-description">Learn how the web works by building something of your own. Start with HTML, add style and interaction, then put your project online.</p>
+      <div class="hero-actions"><a class="button" href="lessons/01-glimpse.html">Start with lesson 1 &rarr;</a><a class="text-link" href="#available-lessons">Explore the course</a></div>
+      <p class="hero-meta">Beginner friendly <span aria-hidden="true">/</span> Learn at your own pace <span aria-hidden="true">/</span> Free to follow</p>
+    </div>
     <section class="card" aria-labelledby="progress-heading">
-      <h2 id="progress-heading">Your progress</h2>
+      <div class="progress-heading"><h2 id="progress-heading">Your progress</h2><p class="muted" data-progress-caption>0 of 10 lessons done</p></div>
       <div class="progress-bar" data-progress-bar
            data-lessons="01-glimpse 02-html-css 03-html-css-js 07-github-upload 08-github-pages 09-vercel 10-vercel-free-database 11-cpanel-deploy 12-vscode-editing 13-ai-test-and-review">
         <div class="progress-bar__fill"></div>
       </div>
-      <p class="muted" data-progress-caption>0 of 10 available lessons done</p>
-      <p class="muted">Progress is saved in this browser only.</p>
+      <p class="progress-note">Mark lessons as done as you go. Your progress stays in this browser.</p>
     </section>
     <section aria-labelledby="available-lessons">
-      <h2 id="available-lessons">Lessons available on this site</h2>
-      <p>These lessons use static HTML, CSS, and JavaScript, so they work on GitHub Pages.</p>
-      <ol>
+      <p class="eyebrow">YOUR LEARNING PATH</p>
+      <h2 id="available-lessons">One lesson at a time.</h2>
+      <p class="section-intro">Read, try the examples, and build your confidence. Ten lessons are available here.</p>
+      <ol class="lesson-grid">
 {links}
       </ol>
     </section>
@@ -113,6 +129,13 @@ def filter_static_navigation(document: str) -> str:
     return document.replace('href="../index.php"', 'href="../index.html"')
 
 
+def prepare_lesson(document: str, filename: str) -> str:
+    document = re.sub(r'<header\b.*?</header>', lambda _: site_header('../', filename), document, count=1, flags=re.S)
+    number = filename[:2]
+    document = document.replace('<h1>', f'<p class="eyebrow">THE GUESTBOOK COURSE / LESSON {number}</p><h1>', 1)
+    return document
+
+
 def repair_pager_links(document: str, filename: str) -> str:
     def replace_php_link(match: re.Match[str]) -> str:
         href, attrs, label = match.groups()
@@ -151,6 +174,7 @@ def main() -> None:
         document = source_file.read_text(encoding="utf-8")
         document = filter_static_navigation(document)
         document = repair_pager_links(document, filename)
+        document = prepare_lesson(document, filename)
         (lesson_output / filename).write_text(document, encoding="utf-8")
 
     (output / "index.html").write_text(index_html(), encoding="utf-8")

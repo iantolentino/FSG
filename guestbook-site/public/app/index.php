@@ -29,14 +29,9 @@ $count = (int) $db->query('SELECT COUNT(*) FROM messages')->fetchColumn();
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="../index.php">&#128216; The Guestbook Course</a>
-      <button class="menu-button" type="button" data-menu-button
-              aria-expanded="false" aria-controls="site-nav">
-        <span class="menu-icon" aria-hidden="true"></span>
-        <span>Lessons</span>
-      </button>
+  <header class="site-header"><div class="container">
+      <a class="brand" href="../index.php"><span class="brand-mark" aria-hidden="true">G</span><span>Guestbook<span class="brand-subtitle">A course in building for the web</span></span></a>
+      <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Lessons</button>
       <nav class="site-nav" id="site-nav" data-site-nav aria-label="Lessons">
         <ul>
           <li><a href="../index.php">Home</a></li>
@@ -56,8 +51,7 @@ $count = (int) $db->query('SELECT COUNT(*) FROM messages')->fetchColumn();
           <li><a href="index.php" aria-current="page">Guestbook app</a></li>
         </ul>
       </nav>
-    </div>
-  </header>
+    </div></header>
 
   <main class="container" id="main">
     <h1>The Guestbook</h1>

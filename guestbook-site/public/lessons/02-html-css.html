@@ -17,13 +17,10 @@
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="../index.php">📖 The Guestbook Course</a>
-    </div>
-  </header>
-
-  <nav class="site-nav is-open" aria-label="Lessons" data-site-nav>
+  <header class="site-header"><div class="container">
+      <a class="brand" href="../index.php"><span class="brand-mark" aria-hidden="true">G</span><span>Guestbook<span class="brand-subtitle">A course in building for the web</span></span></a>
+      <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Lessons</button>
+      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Lessons">
     <ul>
       <li><a href="../index.php">Home</a></li>
       <li><a href="01-glimpse.html">01 · Glimpse</a></li>
@@ -42,6 +39,9 @@
       <li><a href="../app/index.php">Guestbook app</a></li>
     </ul>
   </nav>
+    </div></header>
+
+
 
   <main class="container" id="main">
     <h1>Lesson 2 — HTML + CSS: making it look right</h1>
@@ -185,5 +185,6 @@ Then quiz me with three short questions.</code></pre>
       <p>The Guestbook Course · Lesson 2 of 13</p>
     </div>
   </footer>
+<script src="../assets/js/main.js"></script>
 </body>
 </html>

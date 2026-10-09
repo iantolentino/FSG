@@ -4,23 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lesson 1 · A first glimpse of HTML</title>
-  <!--
-    Lesson 1 is DELIBERATELY plain.
-    It links no stylesheet and no script. You are looking at raw HTML,
-    exactly how the browser sees a page before any CSS arrives.
-    Lesson 2 will add CSS to this file, and lesson 3 will add JavaScript.
-  -->
+  <!-- The course shell is styled; the embedded HTML demo is deliberately unstyled. -->
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <header>
-    <div>
-      <a href="../index.php">Back to the course home page</a>
-    </div>
-  </header>
-
-  <nav aria-label="Lessons">
+  <header class="site-header"><div class="container">
+      <a class="brand" href="../index.php"><span class="brand-mark" aria-hidden="true">G</span><span>Guestbook<span class="brand-subtitle">A course in building for the web</span></span></a>
+      <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Lessons</button>
+      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Lessons">
     <ul>
       <li><a href="../index.php">Home</a></li>
       <li><a href="01-glimpse.html" aria-current="page">01 · Glimpse</a></li>
@@ -39,25 +32,28 @@
       <li><a href="../app/index.php">Guestbook app</a></li>
     </ul>
   </nav>
+    </div></header>
 
-  <main id="main">
+
+
+  <main class="container" id="main">
     <h1>Lesson 1 — a first glimpse of HTML</h1>
 
     <section aria-labelledby="what-youll-learn">
-      <h2>What you'll learn</h2>
+      <h2 id="what-youll-learn">What you'll learn</h2>
       <ul>
         <li>What HTML tags are and how the browser reads them.</li>
         <li>Tags and attributes.</li>
         <li>How a form works in plain HTML.</li>
-        <li>Why this page has no CSS file linked on purpose.</li>
+        <li>How an HTML example looks before adding CSS.</li>
       </ul>
     </section>
 
     <section aria-labelledby="glimpse">
       <h2 id="glimpse">Glimpse</h2>
       <p>
-        Everything here is live HTML. There are no styles attached — this is
-        exactly how a browser shows a page made only of HTML tags.
+        The example below has no stylesheet. The course navigation stays styled,
+        while the example shows how a browser displays plain HTML tags.
       </p>
 
       <h3>A tiny guestbook form (live example)</h3>
@@ -69,17 +65,17 @@
           id   = what the label uses (for="...") to link to this field.
           name = what the server will call this piece of data.
       -->
-      <form action="#" method="get">
-        <p>
-          <label for="name">Your name</label><br>
-          <input id="name" name="name" type="text">
-        </p>
-        <p>
-          <label for="message">Your message</label><br>
-          <input id="message" name="message" type="text">
-        </p>
-        <p><button type="submit">Sign the guestbook</button></p>
-      </form>
+      <iframe class="plain-demo" title="Guestbook form with no CSS" srcdoc="&lt;!doctype html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;title&gt;Plain HTML guestbook&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;form action=&quot;01-glimpse.html#glimpse&quot; target=&quot;_parent&quot; method=&quot;get&quot;&gt;
+        &lt;p&gt;
+          &lt;label for=&quot;name&quot;&gt;Your name&lt;/label&gt;&lt;br&gt;
+          &lt;input id=&quot;name&quot; name=&quot;name&quot; type=&quot;text&quot;&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+          &lt;label for=&quot;message&quot;&gt;Your message&lt;/label&gt;&lt;br&gt;
+          &lt;input id=&quot;message&quot; name=&quot;message&quot; type=&quot;text&quot;&gt;
+        &lt;/p&gt;
+        &lt;p&gt;&lt;button type=&quot;submit&quot;&gt;Sign the guestbook&lt;/button&gt;&lt;/p&gt;
+      &lt;/form&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
       <p class="tip">
         Try submitting the form. Because method="get", your name and message
         appear in the page address as ?name=...&amp;message=... — your first
@@ -90,7 +86,7 @@
     <section aria-labelledby="code-to-add">
       <h2 id="code-to-add">Code to add</h2>
       <p>
-        Lesson 1 needs no file of your own: this page IS the example. Here is
+        The embedded example uses plain HTML. Here is
         its full source, simplified, so you can rebuild it yourself in a new
         file called <code>my-first-page.html</code>:
       </p>
@@ -188,8 +184,9 @@ Then give me one tiny exercise to check I understood.</code></pre>
     </div>
   </main>
 
-  <footer>
+  <footer class="site-footer"><div class="container">
     <p>The Guestbook Course · Lesson 1 of 13</p>
-  </footer>
+  </div></footer>
+<script src="../assets/js/main.js"></script>
 </body>
 </html>
