@@ -4,7 +4,7 @@ A practical beginner program built around **North Studio**, an independent landi
 
 Live course: **https://iantolentino.github.io/FSG/**
 
-## Learning flow
+## Learning flow 
 
 1. Set up VS Code and learn the editing and browser tools.
 2. Build a plain HTML landing page.
