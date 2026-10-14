@@ -4,43 +4,29 @@ A practical beginner program built around **North Studio**, an independent landi
 
 Live course: **https://iantolentino.github.io/FSG/**
 
-## Start with the basic setup
+## The simple learning path
 
-New to development? Open the course’s [basic setup guide](https://iantolentino.github.io/FSG/setup.html), then work through the lessons in order. It explains the minimum tools, running the downloaded reference, and recovering from common setup errors. These new pages become available after deploying this revision.
+Follow the five cards on the [course home page](https://iantolentino.github.io/FSG/):
 
-The core stack is **HTML + CSS + JavaScript → PHP → SQLite**. You can run the complete application on one computer without paid hosting, a frontend framework, npm, or a separate database server. VS Code edits the files; the browser displays the frontend; PHP runs the backend; SQLite persists the records.
+1. Open a project folder in VS Code.
+2. Build a page with HTML, style it with CSS, and add simple JavaScript.
+3. Upload the files to GitHub.
+4. Connect GitHub to Vercel and publish the website.
+5. Add a PHP backend and SQLite database, then connect the form.
 
-- **Learners:** build each lesson, run its checks, and explain its key idea in your own words before marking it complete. Use the [glossary](https://iantolentino.github.io/FSG/glossary.html) when a term is unfamiliar.
-- **Reviewers:** use the [acceptance checklist](https://iantolentino.github.io/FSG/review.html) to reproduce behavior and record pass, needs work, or not tested. Start from a clean download and choose your own local password.
-- **Local completion:** lessons 1–9 establish the frontend, version history, and PHP/SQLite CRUD app. Lessons 10–12 cover hosting and a separate optional serverless database exercise. Lesson 13 gathers the final evidence.
+You can complete the full PHP + SQLite app on your computer. Vercel is used in this beginner path to publish the HTML/CSS/JavaScript website. A local SQLite file is not durable storage for a Vercel serverless app. To put the complete PHP + SQLite app online, use a PHP host such as cPanel; that deployment is an optional lesson. See Vercel’s [SQLite hosting explanation](https://vercel.com/kb/guide/is-sqlite-supported-in-vercel).
 
-This is a foundation course, not a promise of professional readiness. The goal is an application you can run, explain, debug, and extend.
-
-## Learning flow 
-
-1. Set up VS Code and learn the editing and browser tools.
-2. Build a plain HTML landing page.
-3. Add responsive CSS design.
-4. Add JavaScript and accessible animation.
-5. Save and upload the project with Git and GitHub.
-6. Publish the static landing page on GitHub Pages.
-7. Set up a PHP backend and private configuration.
-8. Build persistent SQLite Create, Read, Update, and Delete routes.
-9. Connect the landing form and authenticated request dashboard.
-10. Upload the HTML/CSS/JavaScript/PHP/SQLite application to cPanel.
-11. Learn Vercel deployment, domains, and environments.
-12. Connect a hosted PostgreSQL database through a Vercel server function.
-13. Use AI for debugging and review, then finish the capstone.
+VS Code edits the files; the browser displays the website; PHP processes the form on the server; SQLite saves the requests. The course introduces GitHub and Vercel before the database so you can publish the simple website first.
 
 ## Project references
 
-- `projects/landing/01-html/`: plain HTML landing page.
-- `projects/landing/02-css/`: the same page with responsive design.
-- `projects/landing/03-javascript/`: the same page with motion and frontend feedback.
-- `projects/full-stack/`: complete PHP/SQLite request application, including admin authentication and all four CRUD operations.
-- `projects/vercel-neon/`: optional Node.js/PostgreSQL connection and insert exercise. It is not a complete serverless port of the PHP admin dashboard.
+- `projects/landing/01-html/`: plain HTML page.
+- `projects/landing/02-css/`: responsive CSS version.
+- `projects/landing/03-javascript/`: JavaScript and frontend form feedback.
+- `projects/full-stack/`: complete PHP/SQLite request app with admin sign-in and Create, Read, Update, and Delete.
+- `projects/vercel-neon/`: optional Vercel server-function exercise using hosted PostgreSQL. It is separate from the PHP + SQLite app.
 
-Run the core app with a supported PHP 8.x release (8.3+) and PDO SQLite:
+Run the PHP + SQLite app locally with PHP 8.3+ and PDO SQLite:
 
 ```sh
 cd projects/full-stack
@@ -48,11 +34,11 @@ php tools/setup.php
 php -S localhost:8000 -t public
 ```
 
-Choose the admin password during setup. Open http://localhost:8000/ to submit a fictional project request, then http://localhost:8000/requests.html to manage it. Private configuration and database files are excluded from Git and from generated downloads.
+Choose a local admin password during setup. Visit `http://localhost:8000/` to submit a fictional request, then `http://localhost:8000/requests.html` to manage it. Keep the private configuration and database out of GitHub.
 
 ## Course authoring and publishing
 
-`course/lessons.json` contains the thirteen lessons. `course/assets/` supplies the shared UI. `course/build.py` renders the program, basic setup guide, glossary, reviewer checklist, standalone frontend previews, source references, project downloads, and redirects for the previous HTML lesson URLs.
+`course/lessons.json` contains the thirteen short lessons behind the five-step overview. The main path covers VS Code, HTML, CSS, JavaScript, GitHub, Vercel for the static website, and PHP + SQLite locally. Optional lessons cover GitHub Pages, PHP hosting, and a separate hosted database. `course/assets/` supplies the shared UI. `course/build.py` renders the program, basic setup guide, glossary, reviewer checklist, standalone frontend previews, source references, project downloads, and redirects for the previous HTML lesson URLs.
 
 ```sh
 python .github/scripts/build-pages.py .pages-build

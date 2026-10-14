@@ -50,25 +50,23 @@ class CourseBuildTests(unittest.TestCase):
         for name in ('setup', 'glossary', 'review'):
             self.assertTrue((OUTPUT / f'{name}.html').is_file())
 
-    def test_overview_has_one_core_path_and_tucks_optional_work_away(self):
+    def test_overview_explains_the_five_steps_and_hosting_boundary(self):
         page = (OUTPUT / 'index.html').read_text()
-        self.assertIn('Three steps. One finished app.', page)
-        self.assertIn('data-lessons="01-workspace 02-html-landing 03-css-design 04-javascript-animation 05-git-github 06-github-pages 07-php-backend 08-sqlite-crud 09-connect-crud"', page)
+        for required in ('Open VS Code', 'HTML, CSS, JavaScript', 'Upload to GitHub', 'Deploy to Vercel', 'PHP and SQLite'):
+            self.assertIn(required, page)
+        self.assertIn('The Vercel step publishes your HTML, CSS, and JavaScript website.', page)
+        self.assertIn('To put that PHP app online, use a PHP host such as cPanel', page)
+        self.assertIn('vercel.com/kb/guide/is-sqlite-supported-in-vercel', page)
+        self.assertIn('<details class="lesson-index">', page)
         self.assertIn('<details class="optional-path">', page)
-        self.assertIn('You can stop there. Hosting and extra services are optional.', page)
-        self.assertNotIn('13 lessons <span aria-hidden="true">/', page)
-        core_end = (OUTPUT / 'lessons/09-connect-crud.html').read_text()
-        self.assertIn('href="13-ai-review.html"', core_end)
-        self.assertIn('href="13-ai-review.html"', core_end.split('class="pager"', 1)[1])
-        self.assertNotIn('href="10-cpanel.html"', core_end.split('class="pager"', 1)[1])
-
-    def test_favicon_is_linked_and_copied(self):
-        icon = OUTPUT / 'favicon.svg'
-        self.assertTrue(icon.is_file())
-        svg = icon.read_text()
-        self.assertIn('<svg', svg)
-        for path in (OUTPUT / 'index.html', OUTPUT / 'lessons/01-workspace.html', OUTPUT / 'setup.html'):
-            self.assertTrue(any('favicon.svg?' in link for link in Page(path.read_text()).links), path)
+        # Main route goes from GitHub to Vercel, then from Vercel to PHP and SQLite.
+        github = (OUTPUT / 'lessons/05-git-github.html').read_text()
+        vercel = (OUTPUT / 'lessons/11-vercel.html').read_text()
+        php = (OUTPUT / 'lessons/07-php-backend.html').read_text()
+        self.assertIn('href="11-vercel.html"', github.split('class="pager"', 1)[1])
+        self.assertIn('href="07-php-backend.html"', vercel.split('class="pager"', 1)[1])
+        self.assertIn('href="08-sqlite-crud.html"', php.split('class="pager"', 1)[1])
+        self.assertIn('before adding PHP', (ROOT / 'course/lessons.json').read_text())
 
     def test_downloads_exclude_private_state(self):
         archives = list((OUTPUT / 'downloads').glob('*.zip'))

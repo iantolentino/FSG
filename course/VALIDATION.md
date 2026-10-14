@@ -56,3 +56,12 @@ Checks for this revision: course generation, generated link and fragment integri
 Added a small SVG course icon using the existing teal palette, a friendly smiling browser window, and warm accent dots. The generated site copies it to the root and links it on overview, lessons, and support pages with a content-based cache version.
 
 Checks: site build, favicon route/reference checks, generated links, lesson path and support checks, private download checks, JavaScript syntax, and `git diff --check` passed.
+
+
+## Simplified course path — 14 October 2026
+
+The overview now gives five plain steps: open VS Code; build with HTML, CSS, JavaScript; upload to GitHub; publish the static website on Vercel; add PHP and SQLite. The detailed lesson links are tucked under one disclosure. The sidebar keeps the lesson list collapsed. Lesson 5 leads to Vercel lesson 11, which leads to PHP lesson 7, then SQLite lesson 8, then the connected form in lesson 9. Optional topics remain available without interrupting the main path.
+
+The overview says explicitly that this course's Vercel exercise publishes the frontend. The PHP + SQLite backend runs locally; the complete PHP application needs a compatible PHP host such as cPanel. Vercel's local function storage is not durable SQLite storage. This avoids implying that the same PHP + file-backed SQLite app can be deployed to Vercel unchanged.
+
+Checks: generated course, internal links and fragments, lesson support checkpoints, exact five-step copy, hosting boundary copy, and main-path previous/next links passed. Node JavaScript syntax and `git diff --check` passed. Browser viewport and PHP execution were unavailable.

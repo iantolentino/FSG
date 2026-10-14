@@ -33,24 +33,20 @@ def esc(value):
 
 def header(prefix, current='index'):
     active = ' aria-current="page"' if current == 'index' else ''
-    links = [f'<li><a href="{prefix}index.html"{active}>Course map</a></li>']
-    path = [('01-workspace', 'Start'), ('05-git-github', 'Save your work'), ('07-php-backend', 'Add the backend'), ('09-connect-crud', 'Finish the app')]
-    for slug, label in path:
-        selected = ' aria-current="page"' if current == slug else ''
-        links.append(f'<li><a href="{prefix}lessons/{slug}.html"{selected}>{label}</a></li>')
-    optional = ''.join(f'<li><a href="{prefix}lessons/{lesson["slug"]}.html">{lesson["number"]:02} {esc(lesson["title"])}</a></li>' for lesson in LESSONS[9:12])
-    current_optional = current in [lesson['slug'] for lesson in LESSONS[9:12]]
-    current_capstone = ' aria-current="page"' if current == '13-ai-review' else ''
-    help_active = current in ('setup', 'glossary', 'review')
+    path = [('01-workspace','1. Open VS Code'),('02-html-landing','2. Make the HTML page'),('03-css-design','3. Add the design'),('04-javascript-animation','4. Add JavaScript'),('05-git-github','5. Upload to GitHub'),('11-vercel','6. Publish on Vercel'),('07-php-backend','7. Add PHP'),('08-sqlite-crud','8. Add SQLite'),('09-connect-crud','9. Connect the form'),('13-ai-review','Finish: review your app')]
+    current_core = current in [slug for slug,_ in path]
+    path_links = ''.join(f'<li><a href="{prefix}lessons/{slug}.html"' + (' aria-current="page"' if current == slug else '') + f'>{label}</a></li>' for slug,label in path)
+    optional = ''.join(f'<li><a href="{prefix}lessons/{LESSONS[n-1]["slug"]}.html">{n:02} {esc(LESSONS[n-1]["title"])}</a></li>' for n in (6,10,12))
+    help_active = current in ('setup','glossary','review')
     resources = ''.join(f'<li><a href="{prefix}{slug}.html">{label}</a></li>' for slug,label in [('setup','Basic setup'),('glossary','Glossary'),('review','Reviewer checklist')])
-    current_attr = ' aria-current="page"' if help_active else ''
     return f'''<header class="site-header"><div class="container">
-      <a class="brand" href="{prefix}index.html"><span class="brand-mark" aria-hidden="true">FS</span><span>Basics of Full Stack<span class="brand-subtitle">Build one working app</span></span></a>
+      <a class="brand" href="{prefix}index.html"><span class="brand-mark" aria-hidden="true">FS</span><span>Basics of Full Stack<span class="brand-subtitle">One step at a time</span></span></a>
       <button class="menu-button" type="button" data-menu-button aria-expanded="false" aria-controls="site-nav"><span class="menu-icon" aria-hidden="true"></span>Course menu</button>
-      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Course"><ul>{''.join(links)}
-        <li><details class="nav-disclosure"{' open' if current_optional else ''}><summary>After the core app <span>Optional</span></summary><ul>{optional}</ul></details></li>
-        <li><a href="{prefix}lessons/13-ai-review.html"{current_capstone}>Review your work</a></li>
-        <li><details class="nav-disclosure"{' open' if help_active else ''}><summary{current_attr}>Help and reference</summary><ul>{resources}</ul></details></li>
+      <nav class="site-nav" id="site-nav" data-site-nav aria-label="Course"><ul>
+        <li><a href="{prefix}index.html"{active}>Course overview</a></li>
+        <li><details class="nav-disclosure"{' open' if current_core else ''}><summary>Follow the steps <span>9 short lessons</span></summary><ul>{path_links}</ul></details></li>
+        <li><details class="nav-disclosure"><summary>Optional lessons</summary><ul>{optional}</ul></details></li>
+        <li><details class="nav-disclosure"{' open' if help_active else ''}><summary>Help and reference</summary><ul>{resources}</ul></details></li>
       </ul><a class="nav-resource" href="https://github.com/iantolentino/FSG">Project files on GitHub</a></nav>
     </div></header>'''
 
@@ -77,31 +73,30 @@ def lesson_cards(lessons):
         for l in lessons) + '</ol>'
 
 def index_page():
-    core = LESSONS[:9]
-    lesson_list = ''.join(f'<li><a href="lessons/{lesson["slug"]}.html"><span class="nav-number">{lesson["number"]:02}</span>{esc(lesson["title"])}</a></li>' for lesson in core)
-    body=f'''<div class="course-hero"><p class="eyebrow">A BEGINNER COURSE YOU CAN TAKE ONE STEP AT A TIME</p><h1>Build one working app.</h1>
-    <p class="hero-description">You do not need to understand everything first. Follow three steps: make a web page, save it, then connect it to a database.</p>
-    <div class="hero-actions"><a class="button" href="lessons/01-workspace.html">Start step 1 <span aria-hidden="true">&rarr;</span></a><a class="text-link" href="setup.html">Need help setting up?</a></div>
-    <p class="hero-meta">A simple project &middot; Free tools &middot; Hosting can wait</p></div>
-    <section class="card progress-card" aria-labelledby="progress-heading"><div class="progress-heading"><div><p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p><h2 id="progress-heading">Your progress</h2></div><p class="muted" data-progress-caption>0 of 9 core lessons done</p></div>
-    <div class="progress-bar" role="progressbar" aria-label="Completed core lessons" aria-valuemin="0" aria-valuemax="9" aria-valuenow="0" data-progress-bar data-lessons="{' '.join(x['slug'] for x in core)}"><div class="progress-bar__fill"></div></div><p class="progress-note">Saved in this browser only.</p><a class="button button-secondary" href="lessons/01-workspace.html" data-resume>Continue to step 1 &rarr;</a></section>
-    <section class="path-section" aria-labelledby="path-title"><p class="eyebrow">THE PATH</p><h2 id="path-title">Three steps. One finished app.</h2>
-      <div class="path-cards">
-        <article class="path-card"><p class="path-step">STEP 1 <span>Lessons 1–4</span></p><h3>Make your web page</h3><p>Build a small business page and make it work on a phone.</p><p class="path-result"><strong>You finish with:</strong> a page you made yourself.</p><a href="lessons/01-workspace.html">Start step 1 &rarr;</a></article>
-        <article class="path-card"><p class="path-step">STEP 2 <span>Lessons 5–6</span></p><h3>Save and share it</h3><p>Keep a history of your work and put the page online.</p><p class="path-result"><strong>You finish with:</strong> a shareable web page.</p><a href="lessons/05-git-github.html">Start step 2 &rarr;</a></article>
-        <article class="path-card"><p class="path-step">STEP 3 <span>Lessons 7–9</span></p><h3>Make it save information</h3><p>Add a PHP server and database. Let a visitor send a request; manage it in a private dashboard.</p><p class="path-result"><strong>You finish with:</strong> your first full-stack app.</p><a href="lessons/07-php-backend.html">Start step 3 &rarr;</a></article>
+    lesson_list = ''.join(f'<li><a href="lessons/{LESSONS[n-1]["slug"]}.html">{label}</a></li>' for n,label in [(1,'Open VS Code'),(2,'Build the page with HTML'),(3,'Style it with CSS'),(4,'Add JavaScript'),(5,'Upload the files to GitHub'),(11,'Publish the website on Vercel'),(7,'Start the PHP server'),(8,'Save requests in SQLite'),(9,'Connect the form to the database')])
+    body=f'''<div class="course-hero"><p class="eyebrow">A SIMPLE BEGINNER GUIDE</p><h1>Build a website,<br>one step at a time.</h1>
+    <p class="hero-description">Start with VS Code. Make a page with HTML, CSS, and JavaScript. Put it on GitHub, publish the website, then add PHP and SQLite.</p>
+    <div class="hero-actions"><a class="button" href="lessons/01-workspace.html">Start with VS Code &rarr;</a><a class="text-link" href="setup.html">Need setup help?</a></div>
+    <p class="hero-meta">You can stop after any step and come back later.</p></div>
+    <section class="path-section" aria-labelledby="path-title"><p class="eyebrow">YOUR ROADMAP</p><h2 id="path-title">Five things to do</h2>
+      <div class="path-cards path-cards-five">
+        <article class="path-card"><p class="path-step">01 <span>GET READY</span></p><h3>Open VS Code</h3><p>Create one folder for your website. This is where you keep the files.</p><a href="lessons/01-workspace.html">Show me how &rarr;</a></article>
+        <article class="path-card"><p class="path-step">02 <span>MAKE A WEBSITE</span></p><h3>HTML, CSS, JavaScript</h3><p>HTML adds the words and sections. CSS makes them look good. JavaScript adds actions.</p><a href="lessons/02-html-landing.html">Start building &rarr;</a><p class="mini-links"><a href="lessons/03-css-design.html">CSS</a><a href="lessons/04-javascript-animation.html">JavaScript</a></p></article>
+        <article class="path-card"><p class="path-step">03 <span>SAVE YOUR WORK</span></p><h3>Upload to GitHub</h3><p>Put a copy of your website online so you can access and share the files.</p><a href="lessons/05-git-github.html">Upload the files &rarr;</a></article>
+        <article class="path-card"><p class="path-step">04 <span>PUBLISH THE WEBSITE</span></p><h3>Deploy to Vercel</h3><p>Connect your GitHub project and get a live website link.</p><a href="lessons/11-vercel.html">Publish the website &rarr;</a></article>
+        <article class="path-card"><p class="path-step">05 <span>ADD THE BACKEND</span></p><h3>PHP and SQLite</h3><p>Use PHP to process the form and SQLite to save its requests. Test the complete app on your computer.</p><a href="lessons/07-php-backend.html">Add PHP and SQLite &rarr;</a></article>
       </div>
-      <div class="done-banner"><strong>When step 3 works, you have reached the main goal.</strong><span>You can stop there. Hosting and extra services are optional.</span></div>
     </section>
-    <details class="lesson-index"><summary>Show the 9 core lessons</summary><ol class="lesson-index-list">{lesson_list}</ol></details>
-    <details class="optional-path"><summary>Optional: publish your app or try another database <span>Lessons 10–12</span></summary><p>The core app is complete before these lessons. Continue if you have a PHP host or want to explore Vercel.</p>{lesson_cards(LESSONS[9:12])}<p><a href="lessons/13-ai-review.html">Finish with the project review &rarr;</a></p></details>
-    <section class="help-row"><div><h2>Not sure what a word means?</h2><p>Look it up in the plain-language glossary, or open the setup guide.</p></div><div class="resource-links"><a href="glossary.html">Glossary &rarr;</a><a href="setup.html">Setup guide &rarr;</a><a href="review.html">Reviewer checklist &rarr;</a></div></section>
-    <details class="reference-downloads"><summary>Want to compare with finished examples?</summary><p>Try building each step yourself first. Downloads contain reference code, not configured credentials or a populated database.</p><div class="hero-actions"><a class="button button-secondary" href="downloads/north-studio-full-stack.zip">PHP/SQLite reference app</a><a class="text-link" href="downloads/north-studio-vercel-neon.zip">Optional Vercel exercise</a></div></details>'''
-    return page(TITLE,body,description='Build one small full-stack app in three clear steps. Hosting is optional.')
+    <aside class="hosting-note"><h2>One simple hosting note</h2><p>The Vercel step publishes your HTML, CSS, and JavaScript website. The PHP and SQLite lessons make a full app that runs on your computer. To put that PHP app online, use a PHP host such as cPanel (optional lesson 10). Vercel does not keep a local SQLite database file between server requests.</p><p><a href="lessons/10-cpanel.html">See the optional PHP hosting lesson &rarr;</a> · <a href="https://vercel.com/kb/guide/is-sqlite-supported-in-vercel" target="_blank" rel="noopener">Why SQLite needs different hosting on Vercel</a></p></aside>
+    <details class="lesson-index"><summary>Show every step in order</summary><ol class="lesson-index-list">{lesson_list}</ol></details>
+    <details class="optional-path"><summary>Optional: other hosting lessons</summary><p>You do not need these to complete the basic app.</p>{lesson_cards([LESSONS[5],LESSONS[11]])}<p><a href="lessons/13-ai-review.html">Review your work when you finish &rarr;</a></p></details>
+    <section class="help-row"><div><h2>Need a hand?</h2><p>Look up a word, fix setup, or use the reviewer checklist.</p></div><div class="resource-links"><a href="glossary.html">Glossary</a><a href="setup.html">Setup help</a><a href="review.html">Review checklist</a></div></section>'''
+    return page(TITLE,body,description='A simple path: use VS Code, build with HTML CSS and JavaScript, upload to GitHub, deploy the website, and add PHP with SQLite.')
 
 def lesson_page(lesson):
     number=lesson['number']; slug=lesson['slug']
-    path_label = f'CORE PATH / STEP {number:02} OF 09' if number <= 9 else ('OPTIONAL EXTENSION' if number <= 12 else 'FINISH / REVIEW YOUR APP')
+    path_labels = {1:'STEP 1 / OPEN VS CODE',2:'STEP 2 / HTML',3:'STEP 2 / CSS',4:'STEP 2 / JAVASCRIPT',5:'STEP 3 / GITHUB',11:'STEP 4 / VERCEL WEBSITE',7:'STEP 5 / PHP',8:'STEP 5 / SQLITE',9:'STEP 5 / CONNECT THE FORM',13:'FINISH / REVIEW YOUR APP'}
+    path_label = path_labels.get(number, 'OPTIONAL LESSON')
     body=f'<p class="eyebrow">{path_label} &middot; LESSON {number:02}</p><h1>{esc(lesson["title"])}</h1><p class="lesson-intro">{esc(lesson["summary"])}</p>'
     body+=f'<section class="card" aria-labelledby="outcome-heading"><h2 id="outcome-heading">What you will finish</h2><p>{esc(lesson["outcome"])}</p><p class="prerequisite"><strong>Before you start:</strong> {esc(lesson["prerequisite"])}</p></section>'
     toc = ''.join(f'<li><a href="#section-{i}">{esc(section["heading"])}</a></li>' for i,section in enumerate(lesson['sections']))
@@ -128,8 +123,17 @@ def lesson_page(lesson):
     if lesson['references']:
         body+='<section aria-labelledby="references-heading"><h2 id="references-heading">Official references</h2><ul>'+''.join(f'<li><a href="{esc(url)}" target="_blank" rel="noopener">{esc(label)}</a></li>' for label,url in lesson['references'])+'</ul></section>'
     body+=f'<label class="mark-done"><input type="checkbox" data-lesson-done="{slug}">Mark lesson {number} as done</label><div class="pager">'
-    previous=LESSONS[number-2] if 2 <= number <= 9 else (LESSONS[8] if number == 13 else None)
-    following=LESSONS[number] if 1 <= number < 9 else (LESSONS[12] if number == 9 else None)
+    flow_numbers = [1,2,3,4,5,11,7,8,9,13]
+    if number in flow_numbers:
+        position = flow_numbers.index(number)
+        previous = LESSONS[flow_numbers[position-1]-1] if position > 0 else None
+        following = LESSONS[flow_numbers[position+1]-1] if position+1 < len(flow_numbers) else None
+    elif number == 6:
+        previous, following = LESSONS[4], LESSONS[10]
+    elif number == 10:
+        previous, following = LESSONS[8], LESSONS[10]
+    else:
+        previous, following = LESSONS[9], LESSONS[12]
     body+=f'<a href="{previous["slug"]+".html" if previous else "../index.html"}">&larr; {esc(previous["title"] if previous else "Course overview")}</a>'
     body+=f'<a href="{following["slug"]+".html" if following else "../index.html"}">{esc(following["title"] if following else "You finished the core course — back to the map")} &rarr;</a></div>'
     return page(f'Lesson {number}: {lesson["title"]} | {TITLE}',body,'../',slug,lesson['summary'])

@@ -558,11 +558,11 @@
   {
     "number": 11,
     "slug": "11-vercel",
-    "title": "Vercel, domains, and environments",
+    "title": "Publish your website on Vercel",
     "phase": "Deploy and extend",
-    "summary": "Compare another static deployment path and learn how domains and server environment settings fit together.",
-    "outcome": "A Vercel deployment of the landing page and a clear understanding of deployment URLs, domains, and environment scope.",
-    "prerequisite": "Finish the complete core app; use the static landing snapshot for this exercise.",
+    "summary": "Connect your GitHub repository to Vercel and publish your HTML, CSS, and JavaScript website.",
+    "outcome": "A live link to the static North Studio website.",
+    "prerequisite": "A GitHub repository containing your website files from lesson 5. Do this before adding PHP.",
     "sections": [
       {
         "heading": "Choose the appropriate project version",
