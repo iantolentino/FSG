@@ -45,10 +45,22 @@ class CourseBuildTests(unittest.TestCase):
         self.assertEqual(len(canonical), 13)
         for path in canonical:
             text = path.read_text()
-            for required in ('In this lesson', 'Stuck? Start here', 'Explain it back', 'Check your work'):
+            for required in ('Jump to a section', 'Stuck? Start here', 'Explain it back', 'Check your work'):
                 self.assertIn(required, text, path)
         for name in ('setup', 'glossary', 'review'):
             self.assertTrue((OUTPUT / f'{name}.html').is_file())
+
+    def test_overview_has_one_core_path_and_tucks_optional_work_away(self):
+        page = (OUTPUT / 'index.html').read_text()
+        self.assertIn('Three steps. One finished app.', page)
+        self.assertIn('data-lessons="01-workspace 02-html-landing 03-css-design 04-javascript-animation 05-git-github 06-github-pages 07-php-backend 08-sqlite-crud 09-connect-crud"', page)
+        self.assertIn('<details class="optional-path">', page)
+        self.assertIn('You can stop there. Hosting and extra services are optional.', page)
+        self.assertNotIn('13 lessons <span aria-hidden="true">/', page)
+        core_end = (OUTPUT / 'lessons/09-connect-crud.html').read_text()
+        self.assertIn('href="13-ai-review.html"', core_end)
+        self.assertIn('href="13-ai-review.html"', core_end.split('class="pager"', 1)[1])
+        self.assertNotIn('href="10-cpanel.html"', core_end.split('class="pager"', 1)[1])
 
     def test_downloads_exclude_private_state(self):
         archives = list((OUTPUT / 'downloads').glob('*.zip'))

@@ -43,3 +43,10 @@ Checks performed for this revision:
 - `git diff --check` passed.
 
 This revision did not run browser viewport/accessibility checks or execute the PHP app: a browser control skill and PHP runtime were unavailable. The earlier checks above describe the earlier revision, not new results. Hosted cPanel and Vercel behavior remains untested in this revision. The revised source has not been published to GitHub Pages.
+
+
+## Simplified learner flow — 14 October 2026
+
+The overview now starts with three milestones and gives a clear completion point at the local full-stack app. Optional deployment lessons and reference downloads are tucked into disclosures. The sidebar links to major milestones; optional hosting and help pages open only when requested. Lesson section links, practice challenges, and AI review prompts are collapsed until needed. Lessons 1–9 are the progress count, and lesson 9 leads to the project review instead of an optional deployment step.
+
+Checks for this revision: course generation, generated link and fragment integrity, all thirteen lesson support checkpoints, download privacy, three-step overview and optional disclosures, core lesson 9 to lesson 13 pager, JavaScript syntax, and `git diff --check`. Browser viewport and PHP runtime checks were unavailable.

@@ -140,8 +140,9 @@ function renderProgressBar() {
   const resume = document.querySelector('[data-resume]');
   if (resume) {
     const next = lessonIds.find((id) => !readProgress()[id]);
-    resume.href = next ? `lessons/${next}.html` : 'review.html';
-    resume.textContent = next ? `Continue with lesson ${lessonIds.indexOf(next) + 1} →` : 'All lessons done: review your project →';
+    const route = next || lessonIds[lessonIds.length - 1];
+    resume.href = next ? `lessons/${route}.html` : 'lessons/13-ai-review.html';
+    resume.textContent = next ? `Continue with lesson ${lessonIds.indexOf(next) + 1} →` : 'Core app complete: review your work →';
   }
 
   const fill = bar.querySelector('.progress-bar__fill');

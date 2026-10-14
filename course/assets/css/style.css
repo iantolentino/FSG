@@ -202,3 +202,51 @@ th { background: #eaf0f2; font-weight: 650; }
 .tip h2 { font-size:1.1rem; }
 .tip p:last-of-type { margin-bottom:12px; }
 @media(max-width:650px) { .stack-grid { grid-template-columns:1fr; } .lesson-toc ol { columns:1; } }
+
+/* A quieter learning route: show the next useful action and tuck away extras. */
+.path-section { margin-top:42px; }
+.path-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:22px; }
+.path-card { display:flex; flex-direction:column; min-width:0; padding:22px; border:1px solid var(--color-border); border-radius:12px; background:#fff; }
+.path-card h3 { margin:6px 0 10px; }
+.path-card > p { font-size:.87rem; }
+.path-step { display:flex; justify-content:space-between; gap:8px; margin:0; color:var(--color-accent); font-size:.69rem!important; font-weight:750; letter-spacing:.08em; }
+.path-step span { color:var(--color-text-muted); font-weight:500; letter-spacing:0; }
+.path-result { margin-top:auto; padding-top:12px; color:var(--color-text-muted); }
+.path-card > a { font-size:.85rem; font-weight:700; }
+.done-banner { display:grid; gap:3px; margin-top:16px; padding:18px 22px; background:#eaf5ee; border-radius:9px; color:#206541; }
+.done-banner span { font-size:.85rem; }
+.lesson-index, .optional-path, .reference-downloads, .extra-practice { margin-top:24px; border:1px solid var(--color-border); border-radius:10px; background:#fff; }
+.lesson-index > summary, .optional-path > summary, .reference-downloads > summary, .extra-practice > summary, .lesson-toc > summary { cursor:pointer; padding:18px 22px; font-weight:650; font-size:.9rem; }
+.lesson-index[open], .optional-path[open], .reference-downloads[open], .extra-practice[open], .lesson-toc[open] { padding-bottom:16px; }
+.lesson-index-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px 20px; padding:8px 34px; }
+.lesson-index-list a { font-size:.82rem; text-decoration:none; }
+.lesson-index-list li { min-width:0; }
+.optional-path > p, .reference-downloads > p, .extra-practice > p { margin:12px 22px; font-size:.87rem; }
+.optional-path .lesson-grid { margin:18px 22px; }
+.help-row { display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; margin-top:40px; padding:22px 0; border-top:1px solid var(--color-border); }
+.help-row h2 { font-size:1.05rem; margin-bottom:6px; }
+.help-row p { margin:0; font-size:.84rem; color:var(--color-text-muted); }
+.help-row .resource-links { justify-content:flex-end; }
+.lesson-toc { padding:0; }
+.lesson-toc ol { margin:4px 24px 0; columns:2; }
+.nav-disclosure { padding:0 12px; }
+.nav-disclosure summary { cursor:pointer; padding:12px 0; color:#526574; font-size:.82rem; font-weight:600; }
+.nav-disclosure summary span { float:right; color:var(--color-text-muted); font-size:.7rem; font-weight:500; }
+.nav-disclosure ul { padding-left:10px; }
+.nav-disclosure ul a { font-size:.77rem; }
+@media(max-width:800px) {
+  .site-nav { border-top:1px solid var(--color-border); }
+  .site-nav > ul { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .site-nav > ul > li:nth-child(n+6) { grid-column:1/-1; }
+  .nav-disclosure { padding:4px 12px; }
+}
+@media(max-width:650px) {
+  .path-cards { grid-template-columns:1fr; }
+  .path-card { padding:18px; }
+  .lesson-index-list { grid-template-columns:1fr; }
+  .help-row { grid-template-columns:1fr; }
+  .help-row .resource-links { justify-content:flex-start; }
+  .lesson-toc ol { columns:1; }
+  .site-nav > ul { grid-template-columns:1fr; }
+  .site-nav > ul > li:nth-child(n+6) { grid-column:auto; }
+}
