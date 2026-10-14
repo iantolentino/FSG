@@ -29,3 +29,17 @@ The generated full-stack download was extracted into an isolated folder and run 
 Five generated archives were checked for integrity and for exclusion of configured credentials, populated SQLite databases, environment secrets, and dependency directories.
 
 The optional Vercel starter passed method, request-origin, input-validation, and missing-configuration checks. A real hosted PostgreSQL connection was not provisioned or tested. Its scope is a server connection and insert exercise; the complete authenticated CRUD application is the PHP/SQLite project.
+
+## Beginner guidance revision — 14 October 2026
+
+Added a minimum setup guide, a glossary, and a reviewer acceptance page. All thirteen lessons now include section links, a targeted troubleshooting note, and an explanation checkpoint. The overview distinguishes the local core milestone from hosting exercises and resumes at the first incomplete lesson.
+
+Checks performed for this revision:
+
+- Course generation completed with 13 lessons, 3 support guides, 3 previews, and 5 downloads.
+- `python -m unittest discover -s course/tests -v` passed: generated local links and fragments resolve, page ids are unique, every lesson includes learning support, and archives exclude private configuration, databases, secrets, and dependencies.
+- `node --check course/assets/js/main.js` passed.
+- A Node VM check exercised initial progress, next incomplete lesson, all-complete review link, unmarking a lesson, and malformed/array storage recovery. Progress ARIA values matched the completed count.
+- `git diff --check` passed.
+
+This revision did not run browser viewport/accessibility checks or execute the PHP app: a browser control skill and PHP runtime were unavailable. The earlier checks above describe the earlier revision, not new results. Hosted cPanel and Vercel behavior remains untested in this revision. The revised source has not been published to GitHub Pages.

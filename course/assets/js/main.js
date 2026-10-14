@@ -38,7 +38,7 @@ function readProgress() {
     }
     const parsed = JSON.parse(raw);
     // Only keep it if it is really an object, never trust the store blindly.
-    return parsed && typeof parsed === 'object' ? parsed : {};
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
   } catch (err) {
     // Private-browsing modes can block storage. The site still works
     // without progress saving, so we just swallow the error.
@@ -132,6 +132,17 @@ function renderProgressBar() {
   const done = countDone(lessonIds);
   const total = lessonIds.length;
   const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+
+  bar.setAttribute('aria-valuenow', String(done));
+  bar.setAttribute('aria-valuemax', String(total));
+  bar.setAttribute('aria-valuetext', `${done} of ${total} lessons done`);
+
+  const resume = document.querySelector('[data-resume]');
+  if (resume) {
+    const next = lessonIds.find((id) => !readProgress()[id]);
+    resume.href = next ? `lessons/${next}.html` : 'review.html';
+    resume.textContent = next ? `Continue with lesson ${lessonIds.indexOf(next) + 1} →` : 'All lessons done: review your project →';
+  }
 
   const fill = bar.querySelector('.progress-bar__fill');
   if (fill) {

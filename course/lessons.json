@@ -45,7 +45,13 @@
         "VS Code terminal guide",
         "https://code.visualstudio.com/docs/terminal/getting-started"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "Editor, browser, server",
+      "question": "Which tool changes the file, which displays it, and which will run PHP?",
+      "symptom": "Your edit does not appear",
+      "fix": "Save the file, reload the browser, and compare the browser URL with the file you edited. Make sure you opened the correct project folder."
+    }
   },
   {
     "number": 2,
@@ -91,7 +97,13 @@
     ],
     "preview": "landing/01-html/index.html",
     "download": "north-studio-01-html.zip",
-    "references": []
+    "references": [],
+    "support": {
+      "concept": "Structure before style",
+      "question": "Why does a form field need both a label and a name?",
+      "symptom": "A section link does nothing",
+      "fix": "Compare the link’s fragment (for example #services) with the section id. They must match exactly and each id must be unique."
+    }
   },
   {
     "number": 3,
@@ -138,7 +150,13 @@
     ],
     "preview": "landing/02-css/index.html",
     "download": "north-studio-02-css.zip",
-    "references": []
+    "references": [],
+    "support": {
+      "concept": "Responsive layout",
+      "question": "What makes a media query change a three-column grid into one column?",
+      "symptom": "The stylesheet does not load",
+      "fix": "Open Network, reload, and look for style.css. Check the link path and filename capitalization before changing CSS rules."
+    }
   },
   {
     "number": 4,
@@ -182,7 +200,13 @@
     ],
     "preview": "landing/03-javascript/index.html",
     "download": "north-studio-03-javascript.zip",
-    "references": []
+    "references": [],
+    "support": {
+      "concept": "Browser behavior",
+      "question": "Why can a success message in JavaScript alone not prove a request was saved?",
+      "symptom": "The script stops running",
+      "fix": "Read the first Console error. Check the script path and that #contact-form and #form-status exist before the listener runs."
+    }
   },
   {
     "number": 5,
@@ -234,7 +258,13 @@
         "GitHub getting started",
         "https://docs.github.com/en/get-started"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "Version history",
+      "question": "How is committing locally different from pushing to GitHub?",
+      "symptom": "Git reports that this is not a repository",
+      "fix": "Run commands in your project folder. Check git status there; initialize only your own project if it has no repository yet."
+    }
   },
   {
     "number": 6,
@@ -283,7 +313,13 @@
         "GitHub Pages publishing sources",
         "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "Static hosting",
+      "question": "Why can GitHub Pages show HTML but not execute this PHP API?",
+      "symptom": "The published page has missing styles",
+      "fix": "Check the deployed Network tab for 404 responses. Use relative asset paths and match filename case; inspect the Pages workflow result."
+    }
   },
   {
     "number": 7,
@@ -297,6 +333,10 @@
       {
         "heading": "Give the landing page a server",
         "html": "<p>The browser can display your form but cannot privately manage a shared database. A backend receives HTTP requests, checks their data, applies rules, and sends a response. Your PHP files run on the server; the browser receives JSON or HTML, not the PHP source.</p><p>Start the full-stack project in a separate working folder called <code>north-studio</code>. Copy your landing-page files into public/. Keep the Pages version as the earlier static milestone.</p>"
+      },
+      {
+        "heading": "Choose a clear starting point",
+        "html": "<p>For the simplest first run, download the PHP/SQLite reference project below and extract it into a folder named <code>north-studio</code>. Open that extracted folder in VS Code. You should see <code>public</code>, <code>server</code>, and <code>tools</code> directly inside it. The download supplies the backend files required by the commands below.</p><p>First run the reference unchanged using fictional data. Then compare it with your landing page and move your changes into <code>public/</code>. Keep a copy of your lesson 4 work. In lessons 8 and 9, study and rebuild the routes and browser interactions one at a time; a downloaded working app is your reference, not evidence that you understand it.</p>"
       },
       {
         "heading": "Install PHP and check its extensions",
@@ -339,7 +379,13 @@
         "PDO SQLite",
         "https://www.php.net/manual/en/ref.pdo-sqlite.php"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "Server and document root",
+      "question": "Why must server/config.local.php and data stay outside public/?",
+      "symptom": "The terminal cannot find php, or PDO SQLite is missing",
+      "fix": "Run php --version and php -m. Reopen the terminal after setting PATH. Use php --ini to find the active configuration, enable pdo_sqlite, then restart the server."
+    }
   },
   {
     "number": 8,
@@ -395,7 +441,13 @@
         "SQLite CREATE TABLE",
         "https://www.sqlite.org/lang_createtable.html"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "Persistent data",
+      "question": "How do prepared statements keep submitted values separate from SQL syntax?",
+      "symptom": "The API returns 401, 403, or 422",
+      "fix": "401 means sign in for a management action; 403 means obtain a fresh session token; 422 means inspect the error body and correct the field. Use the local app origin, not the course page."
+    }
   },
   {
     "number": 9,
@@ -440,7 +492,13 @@
     ],
     "preview": null,
     "download": "north-studio-full-stack.zip",
-    "references": []
+    "references": [],
+    "support": {
+      "concept": "One complete round trip",
+      "question": "Trace a form submission through main.js, api.php, SQLite, and the response. Where is success checked?",
+      "symptom": "The form says success but the dashboard is empty",
+      "fix": "Inspect create in Network: it must return 201 and an id. Sign in on the same server, inspect list, and reload. Confirm you are using the full-stack main.js, not the preview listener."
+    }
   },
   {
     "number": 10,
@@ -489,7 +547,13 @@
         "cPanel File Manager",
         "https://docs.cpanel.net/cpanel/files/file-manager/110/"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "Hosting the full app",
+      "question": "Which folders are publicly served and which remain private on your PHP host?",
+      "symptom": "The deployed API returns 500",
+      "fix": "Read the private hosting error log. Check PDO SQLite support, include paths, and PHP write access to data. Do not fix permissions by making everything world-writable."
+    }
   },
   {
     "number": 11,
@@ -542,7 +606,13 @@
         "Vercel environment variables",
         "https://vercel.com/docs/environment-variables"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "A different runtime",
+      "question": "Why is the Vercel Node.js exercise a separate project rather than a PHP deployment?",
+      "symptom": "The Vercel build fails",
+      "fix": "Confirm the selected project root is projects/vercel-neon for the database exercise. Read the build log before changing environment variables."
+    }
   },
   {
     "number": 12,
@@ -611,7 +681,13 @@
         "Neon serverless driver",
         "https://neon.com/blog/serverless-driver-ga"
       ]
-    ]
+    ],
+    "support": {
+      "concept": "Hosted database connection",
+      "question": "Why does the database connection string belong on the server rather than in browser JavaScript?",
+      "symptom": "The hosted function cannot connect",
+      "fix": "Check that the server-side DATABASE_URL is configured in the correct environment, redeploy after changing it, and inspect sanitized function logs. Never put the value in frontend code or a screenshot."
+    }
   },
   {
     "number": 13,
@@ -645,6 +721,10 @@
       {
         "heading": "A final review prompt",
         "html": "<pre><code>Review my North Studio landing page and PHP/SQLite CRUD project.\nFor every finding, cite the file and relevant function or selector.\nGroup findings by broken behavior, accessibility, and data access.\nSeparate confirmed issues from assumptions you want me to verify.\nDo not invent test results. Do not migrate the project to a framework.\nGive a short acceptance checklist for the proposed fixes.</code></pre>"
+      },
+      {
+        "heading": "Give your reviewer a repeatable handoff",
+        "html": "<p>Open the <a href=\"../review.html\">review checklist</a> and run the minimum acceptance flow. For each result, record what you tested, what happened, and any limitation. Give the reviewer setup instructions and fictional sample data; let them choose their own local admin password.</p><p>Completing this course demonstrates foundation skills in one small stack. It does not cover every responsibility of a professional full-stack role. Next, practice automated API tests, team code reviews, backups and recovery, and deployment monitoring.</p>"
       }
     ],
     "checks": [
@@ -660,6 +740,12 @@
     "files": [],
     "preview": null,
     "download": "north-studio-full-stack.zip",
-    "references": []
+    "references": [],
+    "support": {
+      "concept": "Evidence before completion",
+      "question": "How can a reviewer distinguish a tested feature from an unverified claim?",
+      "symptom": "A review finds a failure",
+      "fix": "Record expected and actual behavior, the relevant file, and reproduction steps. Fix one issue and repeat the affected check; leave untested hosting marked as untested."
+    }
   }
 ]

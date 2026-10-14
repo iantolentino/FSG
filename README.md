@@ -4,6 +4,18 @@ A practical beginner program built around **North Studio**, an independent landi
 
 Live course: **https://iantolentino.github.io/FSG/**
 
+## Start with the basic setup
+
+New to development? Open the course’s [basic setup guide](https://iantolentino.github.io/FSG/setup.html), then work through the lessons in order. It explains the minimum tools, running the downloaded reference, and recovering from common setup errors. These new pages become available after deploying this revision.
+
+The core stack is **HTML + CSS + JavaScript → PHP → SQLite**. You can run the complete application on one computer without paid hosting, a frontend framework, npm, or a separate database server. VS Code edits the files; the browser displays the frontend; PHP runs the backend; SQLite persists the records.
+
+- **Learners:** build each lesson, run its checks, and explain its key idea in your own words before marking it complete. Use the [glossary](https://iantolentino.github.io/FSG/glossary.html) when a term is unfamiliar.
+- **Reviewers:** use the [acceptance checklist](https://iantolentino.github.io/FSG/review.html) to reproduce behavior and record pass, needs work, or not tested. Start from a clean download and choose your own local password.
+- **Local completion:** lessons 1–9 establish the frontend, version history, and PHP/SQLite CRUD app. Lessons 10–12 cover hosting and a separate optional serverless database exercise. Lesson 13 gathers the final evidence.
+
+This is a foundation course, not a promise of professional readiness. The goal is an application you can run, explain, debug, and extend.
+
 ## Learning flow 
 
 1. Set up VS Code and learn the editing and browser tools.
@@ -40,7 +52,7 @@ Choose the admin password during setup. Open http://localhost:8000/ to submit a 
 
 ## Course authoring and publishing
 
-`course/lessons.json` contains the thirteen lessons. `course/assets/` supplies the shared UI. `course/build.py` renders the program, standalone frontend previews, source references, project downloads, and redirects for the previous HTML lesson URLs.
+`course/lessons.json` contains the thirteen lessons. `course/assets/` supplies the shared UI. `course/build.py` renders the program, basic setup guide, glossary, reviewer checklist, standalone frontend previews, source references, project downloads, and redirects for the previous HTML lesson URLs.
 
 ```sh
 python .github/scripts/build-pages.py .pages-build
