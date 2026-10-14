@@ -59,9 +59,12 @@ def asset_url(prefix, asset):
     return f'{prefix}{asset}?v={version}'
 
 def page(title, body, prefix='', current='index', description=''):
+    favicon_hash = hashlib.sha256((COURSE / 'assets/favicon.svg').read_bytes()).hexdigest()[:12]
+    favicon = f'{prefix}favicon.svg?v={favicon_hash}'
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title><meta name="description" content="{esc(description)}">
+<link rel="icon" type="image/svg+xml" href="{favicon}">
 <link rel="stylesheet" href="{asset_url(prefix, 'assets/css/style.css')}"></head>
 <body><a class="skip-link" href="#main">Skip to main content</a>{header(prefix,current)}
 <main class="container" id="main">{body}</main>
@@ -224,6 +227,7 @@ def main():
     (output/'lessons').mkdir(parents=True)
     (output/'downloads').mkdir()
     shutil.copytree(COURSE/'assets',output/'assets')
+    shutil.copy2(COURSE/'assets/favicon.svg',output/'favicon.svg')
     shutil.copytree(ROOT/'projects/landing',output/'examples/landing')
     (output/'index.html').write_text(index_page(),encoding='utf-8')
     for kind in ('setup', 'glossary', 'review'):
@@ -242,6 +246,6 @@ def main():
     package(ROOT/'projects/full-stack',output/'downloads/north-studio-full-stack.zip')
     package(ROOT/'projects/vercel-neon',output/'downloads/north-studio-vercel-neon.zip')
     (output/'.nojekyll').write_text('',encoding='utf-8')
-    print('Built 13 lessons, 3 support guides, 3 project previews, and 5 project downloads.')
+    print('Built 13 lessons, 3 support guides, favicon, 3 project previews, and 5 project downloads.')
 
 if __name__=='__main__': main()

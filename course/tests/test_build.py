@@ -62,6 +62,14 @@ class CourseBuildTests(unittest.TestCase):
         self.assertIn('href="13-ai-review.html"', core_end.split('class="pager"', 1)[1])
         self.assertNotIn('href="10-cpanel.html"', core_end.split('class="pager"', 1)[1])
 
+    def test_favicon_is_linked_and_copied(self):
+        icon = OUTPUT / 'favicon.svg'
+        self.assertTrue(icon.is_file())
+        svg = icon.read_text()
+        self.assertIn('<svg', svg)
+        for path in (OUTPUT / 'index.html', OUTPUT / 'lessons/01-workspace.html', OUTPUT / 'setup.html'):
+            self.assertTrue(any('favicon.svg?' in link for link in Page(path.read_text()).links), path)
+
     def test_downloads_exclude_private_state(self):
         archives = list((OUTPUT / 'downloads').glob('*.zip'))
         self.assertEqual(len(archives), 5)

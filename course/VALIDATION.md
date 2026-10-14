@@ -50,3 +50,9 @@ This revision did not run browser viewport/accessibility checks or execute the P
 The overview now starts with three milestones and gives a clear completion point at the local full-stack app. Optional deployment lessons and reference downloads are tucked into disclosures. The sidebar links to major milestones; optional hosting and help pages open only when requested. Lesson section links, practice challenges, and AI review prompts are collapsed until needed. Lessons 1–9 are the progress count, and lesson 9 leads to the project review instead of an optional deployment step.
 
 Checks for this revision: course generation, generated link and fragment integrity, all thirteen lesson support checkpoints, download privacy, three-step overview and optional disclosures, core lesson 9 to lesson 13 pager, JavaScript syntax, and `git diff --check`. Browser viewport and PHP runtime checks were unavailable.
+
+## Course favicon — 14 October 2026
+
+Added a small SVG course icon using the existing teal palette, a friendly smiling browser window, and warm accent dots. The generated site copies it to the root and links it on overview, lessons, and support pages with a content-based cache version.
+
+Checks: site build, favicon route/reference checks, generated links, lesson path and support checks, private download checks, JavaScript syntax, and `git diff --check` passed.
