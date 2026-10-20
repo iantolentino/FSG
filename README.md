@@ -1,6 +1,6 @@
 # Basics of Full Stack
 
-A practical beginner program built around **North Studio**, an independent landing-page and project-request application. The application is separate from the course website.
+A practical beginner program built around **North Studio**, an independent landing-page and project-request application. The application is separate from the course website. 
 
 Live course: **https://iantolentino.github.io/FSG/**
 
